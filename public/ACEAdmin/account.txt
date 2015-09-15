@@ -1,0 +1,5 @@
+- MySQL :
+acc:root
+pass:root
+- railo-context/admin/server.cfm :
+pass:123456
