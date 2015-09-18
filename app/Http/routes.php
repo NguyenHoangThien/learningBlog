@@ -22,6 +22,10 @@ Route::group(['prefix'=>'admin'], function (){
 		Route::get('/role', 'role@index');
 		Route::post('/roleStore', 'role@store');
 		Route::post('/deleteRole', 'role@destroy');
+
+		Route::get('/tag', 'tag@index');
+		Route::post('/tagStore', 'tag@store');
+		Route::post('/deleteTag', 'tag@destroy');
 	});
 });
 

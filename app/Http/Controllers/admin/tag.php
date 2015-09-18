@@ -18,7 +18,7 @@ class tag extends Controller
     public function index()
     {
         $qTags = Tags::all();   
-        return view('admin.categories',compact('qTags'));
+        return view('admin.tags',compact('qTags'));
     }
 
     /**
@@ -31,7 +31,7 @@ class tag extends Controller
     {
         // dd($request);
         if($request->tID){
-            $tag = Tags::where(wheretID($request->tID));
+            $tag = Tags::wheretid($request->tID)->first();
         }else{
             $tag = new Tags;
         }
@@ -48,10 +48,8 @@ class tag extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
-        $request   = Request::all();
         Tags::destroy($request->tID);
         return "success";
     }

@@ -47,9 +47,9 @@ class role extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         Roles::destroy($request->rID);
-        return "success";
+        return "success" ;
     }
 }
