@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Models\Articles;
+use Input;
+use File;
+use Redirect;
 class article extends Controller
 {
     /**
@@ -17,16 +20,8 @@ class article extends Controller
     public function index()
     {
         //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
+        $qArticles = Articles::all();   
+        return view('admin.categories',compact('qArticles'));
     }
 
     /**
@@ -36,6 +31,42 @@ class article extends Controller
      * @return Response
      */
     public function store(Request $request)
+    {
+        if($request->aID){
+            $article = Categories::where(whereaID($request->aID));
+        }else{
+            $article = new Categories;
+        }
+
+        $file = Input::file('image');
+        $destinationPath = public_path().'/assets/images/';
+        $fileName = explode(".", $file->getClientOriginalName())[0];
+        $fileName = $fileName.rand(1,9999).".".$file->getClientOriginalExtension();
+        Input::file('image')->move($destinationPath, $fileName);
+        $article->aTitle = $request->aTitle;
+        $article->aDescription = $request->aDes;
+        $article->cParentID = $request->articleParent;
+        $article->cName = $request->cName;
+        if(!is_null($file)){
+            $article->aImage = $fileName;
+            if($request->cID){
+                //remove file name before
+            }
+        }
+        $article->save();
+        return Redirect::action('admin\article@index');
+        /* https://laracasts.com/discuss/channels/general-discussion/laravel-5-image-upload-and-resize?page=1
+        *  Link upload and resize image
+        */
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
     {
         //
     }
@@ -51,37 +82,5 @@ class article extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+   
 }

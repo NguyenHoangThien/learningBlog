@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Models\Roles;
+use Redirect;
 class role extends Controller
 {
     /**
@@ -17,17 +18,10 @@ class role extends Controller
     public function index()
     {
         //
+        $qRoles = Roles::all();   
+        return view('admin.categories',compact('qRoles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,41 +31,19 @@ class role extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        // dd($request);
+        if($request->rID){
+            $role = Roles::where(whererID($request->rID));
+        }else{
+            $role = new Roles;
+        }
+        $role->rName = $request->rName;
+        $role->rDescription = $request->rDes;
+        $role->save();
+        return Redirect::action('admin\role@index');
+        /* https://laracasts.com/discuss/channels/general-discussion/laravel-5-image-upload-and-resize?page=1
+        *  Link upload and resize image
+        */
     }
 
     /**
@@ -83,5 +55,8 @@ class role extends Controller
     public function destroy($id)
     {
         //
+        $request   = Request::all();
+        Roles::destroy($request->rID);
+        return "success";
     }
 }

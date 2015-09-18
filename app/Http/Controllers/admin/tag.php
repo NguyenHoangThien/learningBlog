@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Models\Tags;
+use Redirect;
 class tag extends Controller
 {
     /**
@@ -16,17 +17,8 @@ class tag extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
+        $qTags = Tags::all();   
+        return view('admin.categories',compact('qTags'));
     }
 
     /**
@@ -37,42 +29,18 @@ class tag extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        if($request->tID){
+            $tag = Tags::where(wheretID($request->tID));
+        }else{
+            $tag = new Tags;
+        }
+        $tag->tName = $request->tName;
+        $tag->tDescription = $request->tDes;
+        $tag->save();
+        return Redirect::action('admin\tag@index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -83,5 +51,8 @@ class tag extends Controller
     public function destroy($id)
     {
         //
+        $request   = Request::all();
+        Tags::destroy($request->tID);
+        return "success";
     }
 }

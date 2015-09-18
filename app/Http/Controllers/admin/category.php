@@ -24,16 +24,6 @@ class category extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  Request  $request
@@ -43,22 +33,27 @@ class category extends Controller
     {
         // dd($request);
         if($request->cID){
-            echo("edit") , $request['cID'];
+            $category = Categories::where("cID",$request->cID)->first();
         }else{
             $category = new Categories;
-            $file = Input::file('image');
+        }
+
+        $category->cName = $request->cName;
+        $category->cDescription = $request->cDes;
+        $category->cParentID = $request->categoryParent;
+        $category->cName = $request->cName;
+        $file = Input::file('image');
+        if(!is_null($file)){
             $destinationPath = public_path().'/assets/images/';
             $fileName = explode(".", $file->getClientOriginalName())[0];
             $fileName = $fileName.rand(1,9999).".".$file->getClientOriginalExtension();
             Input::file('image')->move($destinationPath, $fileName);
-            $category->cName = $request->cName;
-            $category->cDescription = $request->cDes;
-            $category->cParentID = $request->categoryParent;
-            $category->cName = $request->cName;
             $category->cIcon = $fileName;
-            $category->save();
+            if($request->cID){
+                //remove file name before
+            }
         }
-
+        $category->save();
         return Redirect::action('admin\category@index');
         /* https://laracasts.com/discuss/channels/general-discussion/laravel-5-image-upload-and-resize?page=1
         *  Link upload and resize image
@@ -71,13 +66,10 @@ class category extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Categories::destroy($request->cID);
+        return "success" ;
     }
-
-
-
-    
     
 }

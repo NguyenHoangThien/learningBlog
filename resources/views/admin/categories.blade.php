@@ -28,17 +28,21 @@
 	                        <tr>
 	                            <td style="text-align:center;"> {{ $category['cID'] }} </td>
 	                            @if(is_null($category['cIcon']))
-	                            	<td><img src="/assets/img/default.jpg" width="80px" /></td>
+	                            	<td><img id="cIcon{{ $category['cID'] }}" src="/assets/img/default.jpg" width="80px" /></td>
 	                            @else
-	                            	<td><img src="/assets/images/{{$category['cIcon']}}" width="80px"/></td>
+	                            	<td><img id="cIcon{{ $category['cID'] }}" src="/assets/images/{{$category['cIcon']}}" width="80px"/></td>
 	                            @endif
-	                            <td> {{ $category['cName'] }} </td>
-	                            <td> {{ $category['cDescription'] }} </td>
-	                            <td> {{ $category['cParentID'] }} </td>
+	                            <td id="cName{{ $category['cID'] }}"> {{ $category['cName'] }} </td>
+	                            <td id="cDes{{ $category['cID'] }}"> {{ $category['cDescription'] }} </td>
+	                            <td id="cParent{{ $category['cID'] }}"> {{ $category['cParentID'] }} </td>
 	                            <td style="text-align:center;">
 	                            	@if($category['cID'] != 1)
-	                                <i class="btn btn-mini btn-success ace-icon fa fa-pencil green" title="edit"></i>
-	                                <i class="btn btn-mini btn-danger ace-icon fa fa-trash red" title="edit"></i>
+	                                <i class="btn btn-mini btn-success ace-icon fa fa-pencil green" title="edit"
+	                                onclick="editCategory({{ $category['cID'] }});"
+	                                ></i>
+	                                <i class="btn btn-mini btn-danger ace-icon fa fa-trash red" title="edit"
+	                                onclick="deleteCategory({{ $category['cID'] }});"
+	                                ></i>
 	                                @endif
 	                            </td>
 	                        </tr>   
@@ -59,7 +63,7 @@
 					 	style="font-size: 19px;"
 					 >x</button>
 					<h4 class="modal-title" id="myModalLabel">
-						<b> Add new Category </b>
+						<b id="titleForm"> Add new Category </b>
 					</h4>
 				</div>
 				<form class="form-horizontal" enctype="multipart/form-data" role="form" id="form" method="POST" action="/admin/categoryStore">
@@ -125,7 +129,6 @@
 	<script src="/ACEAdmin/assets/js/chosen.jquery.min.js"></script>
 	<script src="/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript">
-
 	    $(document).ready(function(){
 	        $('#po').dataTable({
 	            'iDisplayLength': 25
@@ -136,6 +139,11 @@
 	        //     $("#add-MatchType").modal('show');
 	        //     $("#isAddMore").prop('checked',true);
 	        // }
+	        $.ajaxSetup({
+		        headers: {
+		            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		        }
+			});
 
 	    });
 
@@ -151,9 +159,22 @@
 	 //    function showForm(){
 	 //    	$("#add-MatchType").modal('show');
 	 //    }
-	 
-		function addForm() {
+	 	function editCategory(cID){
+	 		$("#cID").val(cID);
+	 		$("#cName").val($("#cName" + cID).text());
+	 		$("#cDes").val($("#cDes" + cID).text());
+	 		$("#aIfile").attr("src", $("#cIcon" + cID).attr("src"));
+	 		$("#categoryParent").val( + $("#cParent" + cID).text());
+			$("#titleForm").text("Edit Category");
 			$("#category-form").modal('show');
+	 	}
+		function addForm() {
+			document.getElementById("form").reset();
+			$("#cID").val(0);
+			$("#aIfile").attr("src", "");
+			$("#category-form").modal('show');
+			$("#titleForm").text("Add new Category");
+
 		}
 		function readURL(input,imgtag) {
 	        if (input.files && input.files[0]) {
@@ -164,7 +185,6 @@
 	            reader.readAsDataURL(input.files[0]);
 	        }
 	    };
-	        //get filename of fileupload 3
 	    $('#image').change(function() {
 	        var filename = $(this).val();
 	        var lastIndex = filename.lastIndexOf("\\");
@@ -173,6 +193,21 @@
 	        }
 	        readURL(this,"aIfile");
 	    });
+	    function deleteCategory(id) {
+	    	if(confirm("Are you sure you want to delete it ?")){
+	    		// call ajax here
+	    		$.ajax({
+	               	type: "POST",
+	               	url: "/admin/deleteCategory",
+	               	async: false,
+	               	data: {
+	               		cID : id,
+	            	},success: function( data ) {
+		            	location.reload();
+		            }
+		        });
+	    	}
+	    }
 	</script>
 
 @stop
