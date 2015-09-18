@@ -11,32 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['prefix'=>'admin'], function (){
+	Route::group(['namespace'=>'admin'], function (){
+		Route::get('/user', 'user@index');
+		Route::get('/category', 'category@index');
+		Route::post('/categoryStore', 'category@store');
+		Route::post('/deleteCategory', 'category@destroy');
+	});
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('/admin/layout');
-});
-Route::get('/admin/user', 'admin\user@index');
-Route::get('/admin/category', 'admin\category@index');
-Route::post('/admin/categoryStore', 'admin\category@store');
 
-
-
-Route::get('/admin/comment', function () {
-    return view('/admin/layout');
-});
-Route::get('/admin/article', function () {
-    return view('/admin/layout');
-});
-
-Route::get('/admin/role', function () {
-    return view('/admin/layout');
-});
-Route::get('/admin/tag', function () {
-    return view('/admin/layout');
-});
 
 // Route::group(array('namespace' => 'User'), function (){
 
