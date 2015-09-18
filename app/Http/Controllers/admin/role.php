@@ -17,9 +17,8 @@ class role extends Controller
      */
     public function index()
     {
-        //
         $qRoles = Roles::all();   
-        return view('admin.categories',compact('qRoles'));
+        return view('admin.roles',compact('qRoles'));
     }
 
 
@@ -31,9 +30,8 @@ class role extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         if($request->rID){
-            $role = Roles::where(whererID($request->rID));
+            $role = Roles::where("rID",$request->rID)->first();
         }else{
             $role = new Roles;
         }
@@ -41,9 +39,6 @@ class role extends Controller
         $role->rDescription = $request->rDes;
         $role->save();
         return Redirect::action('admin\role@index');
-        /* https://laracasts.com/discuss/channels/general-discussion/laravel-5-image-upload-and-resize?page=1
-        *  Link upload and resize image
-        */
     }
 
     /**
@@ -54,8 +49,6 @@ class role extends Controller
      */
     public function destroy($id)
     {
-        //
-        $request   = Request::all();
         Roles::destroy($request->rID);
         return "success";
     }

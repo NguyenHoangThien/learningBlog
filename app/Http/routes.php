@@ -18,6 +18,10 @@ Route::group(['prefix'=>'admin'], function (){
 		Route::get('/category', 'category@index');
 		Route::post('/categoryStore', 'category@store');
 		Route::post('/deleteCategory', 'category@destroy');
+
+		Route::get('/role', 'role@index');
+		Route::post('/roleStore', 'role@store');
+		Route::post('/deleteRole', 'role@destroy');
 	});
 });
 
