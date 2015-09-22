@@ -30,6 +30,10 @@ Route::group(['prefix'=>'admin'], function (){
 		Route::get('/user/create', 'user@create');
 		Route::post('/user/store', 'user@store');
 		Route::post('/userBand', 'user@band');
+
+		Route::get('/article', 'article@index');
+		Route::get('/article/create', 'article@create');
+		Route::post('/article/store', 'article@store');
 	});
 });
 

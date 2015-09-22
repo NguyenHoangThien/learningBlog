@@ -24,6 +24,17 @@ class article extends Controller
         return view('admin.categories',compact('qArticles'));
     }
 
+    public function create(Request $request)
+    {
+        $qArticles = new Articles ;
+        $articleID = $request->aID ? $request->aID : 0;
+        if($articleID){
+            $qArticles = Articles::where("aID",$articleID)->first();
+        }else{
+            $qArticles = new Articles;
+        }
+        return view('admin.article.create',compact('qArticles','articleID'));
+    }
     /**
      * Store a newly created resource in storage.
      *
