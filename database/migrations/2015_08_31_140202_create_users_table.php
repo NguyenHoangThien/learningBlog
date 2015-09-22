@@ -16,12 +16,12 @@ class CreateUsersTable extends Migration
             $table->increments('uID');
             $table->string('uUsername');
             $table->string('uEmail');
-            $table->dateTime('uBirthday')->nullable();
+            $table->date('uBirthday')->nullable();
             $table->string('uPassword');
             $table->string('uAvatar')->nullable();
             $table->string('uAddress')->nullable();
             $table->string('uPhone')->nullable();
-            $table->dateTime('uRegistedDate');
+            $table->date('uRegisteredDate');
             $table->tinyInteger('uIsActive');
             $table->integer('uRole');
         });

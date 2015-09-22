@@ -38,10 +38,10 @@ class category extends Controller
             $category = new Categories;
         }
 
-        $category->cName = $request->cName;
+        $category->cName        = $request->cName;
         $category->cDescription = $request->cDes;
-        $category->cParentID = $request->categoryParent;
-        $category->cName = $request->cName;
+        $category->cParentID    = $request->categoryParent;
+        $category->cName        = $request->cName;
         $file = Input::file('image');
         if(!is_null($file)){
             $destinationPath = public_path().'/assets/images/';

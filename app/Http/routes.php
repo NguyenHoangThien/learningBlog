@@ -14,7 +14,6 @@
 
 Route::group(['prefix'=>'admin'], function (){
 	Route::group(['namespace'=>'admin'], function (){
-		Route::get('/user', 'user@index');
 		Route::get('/category', 'category@index');
 		Route::post('/categoryStore', 'category@store');
 		Route::post('/deleteCategory', 'category@destroy');
@@ -26,6 +25,11 @@ Route::group(['prefix'=>'admin'], function (){
 		Route::get('/tag', 'tag@index');
 		Route::post('/tagStore', 'tag@store');
 		Route::post('/deleteTag', 'tag@destroy');
+
+		Route::get('/user', 'user@index');
+		Route::get('/user/create', 'user@create');
+		Route::post('/user/store', 'user@store');
+		Route::post('/userBand', 'user@band');
 	});
 });
 

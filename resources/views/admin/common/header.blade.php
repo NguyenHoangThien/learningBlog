@@ -11,5 +11,6 @@
 	<link rel="stylesheet" href="/ACEAdmin/assets/css/ace.min.css" />
 	<link rel="stylesheet" href="/ACEAdmin/assets/css/ace-skins.min.css" />
 	<link rel="stylesheet" href="/ACEAdmin/assets/css/ace-rtl.min.css" />
+	@yield('hearderLink')
 	<script src="/ACEAdmin/assets/js/ace-extra.min.js"></script>
 </head>
