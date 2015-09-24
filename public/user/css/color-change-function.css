@@ -1,0 +1,229 @@
+/* --------------------------------------------------------
+Demobox CSS
+-----------------------------------------------------------*/
+
+#demo-box {
+    position: fixed;
+    left: 0;
+    width: 250px;
+    padding: 20px;
+    background: #fff;
+    z-index: 999;
+    top: 50%;
+    margin-top: -150px;
+}
+.close-box {
+    background: none repeat scroll 0 0 red;
+    position: absolute;
+    right: -40px;
+    top: 0;
+    cursor: pointer;
+}
+#demo-box i.fa {
+    color: #fff;
+    font-size: 20px;
+    height: 40px;
+    padding-top: 9px;
+    text-align: center;
+    width: 40px;
+}
+#demo-box i.fa.box-close { display: none }
+#demo-box i.fa.box-open { }
+.color-box { margin-left: -10px }
+.color-box span {
+    display: block;
+    float: left;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    width: 63px;
+    cursor: pointer;
+}
+.color-box span.default-color { background-color: #39CA74 }
+.color-box span.lightgren-color { background-color: #16a085 }
+.color-box span.blue-color { background-color: #2980b9 }
+.color-box span.darkblue-color { background-color: #2c3e50 }
+.color-box span.sliver-color { background-color: #bdc3c7 }
+.color-box span.red-color { background-color: #c0392b }
+#demo-box h2 {
+    color: #5c5c5c;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+
+
+
+.lightgren-color a:hover,
+.lightgren-color ul.nav.navbar-nav li:hover > a,
+.lightgren-color .post-content a:hover,
+.lightgren-color .social-profiles a:hover,
+.lightgren-color #tweet a,
+.lightgren-color .entry-summary a,
+.lightgren-color .comment-reply-link,
+.lightgren-color .back-to-home a { color: #16A085 }
+.lightgren-color .header-top-area,
+.lightgren-color .slides .owl-nav > div:hover,
+.lightgren-color .slide-text,
+.lightgren-color .post-info,
+.lightgren-color .tag-cloud a:hover,
+.lightgren-color .post-navigation .pagination > li > a:focus,
+.lightgren-color .post-navigation .pagination > li > a:hover,
+.lightgren-color .post-navigation .pagination > li > span:focus,
+.lightgren-color .post-navigation .pagination > li > span:hover,
+.lightgren-color .post-featured-content blockquote,
+.lightgren-color .gallery-control:hover,
+.lightgren-color .post-type-link,
+.lightgren-color .progress-bar,
+.lightgren-color .skill-counter,
+.lightgren-color .skill-counter::after,
+.lightgren-color input[type="submit"],
+.lightgren-color .contact-form::after,
+.lightgren-color .contact-form::before,
+.lightgren-color .back-to-home a:hover,
+.lightgren-color .back-to-home a:hover,
+.lightgren-color .post-featured-content a.post-lightbox::after,
+.lightgren-color .download-cv a { background-color: #16A085 }
+.lightgren-color .entry-summary blockquote,
+.lightgren-color .contact-form,
+.lightgren-color .back-to-home a { border-color: #16A085 }
+
+
+.blue-color a:hover,
+.blue-color ul.nav.navbar-nav li:hover > a,
+.blue-color .post-content a:hover,
+.blue-color .social-profiles a:hover,
+.blue-color #tweet a,
+.blue-color .entry-summary a,
+.blue-color .comment-reply-link,
+.blue-color .back-to-home a { color: #2980B9 }
+.blue-color .header-top-area,
+.blue-color .slides .owl-nav > div:hover,
+.blue-color .slide-text,
+.blue-color .post-info,
+.blue-color .tag-cloud a:hover,
+.blue-color .post-navigation .pagination > li > a:focus,
+.blue-color .post-navigation .pagination > li > a:hover,
+.blue-color .post-navigation .pagination > li > span:focus,
+.blue-color .post-navigation .pagination > li > span:hover,
+.blue-color .post-featured-content blockquote,
+.blue-color .gallery-control:hover,
+.blue-color .post-type-link,
+.blue-color .progress-bar,
+.blue-color .skill-counter,
+.blue-color .skill-counter::after,
+.blue-color input[type="submit"],
+.blue-color .contact-form::after,
+.blue-color .contact-form::before,
+.blue-color .back-to-home a:hover,
+.blue-color .back-to-home a:hover,
+.blue-color .post-featured-content a.post-lightbox::after,
+.blue-color .download-cv a { background-color: #2980B9 }
+.blue-color .entry-summary blockquote,
+.blue-color .contact-form,
+.blue-color .back-to-home a { border-color: #2980B9 }
+
+
+.darkblue-color a:hover,
+.darkblue-color ul.nav.navbar-nav li:hover > a,
+.darkblue-color .post-content a:hover,
+.darkblue-color .social-profiles a:hover,
+.darkblue-color #tweet a,
+.darkblue-color .entry-summary a,
+.darkblue-color .comment-reply-link,
+.darkblue-color .back-to-home a { color: #2C3E50 }
+.darkblue-color .header-top-area,
+.darkblue-color .slides .owl-nav > div:hover,
+.darkblue-color .slide-text,
+.darkblue-color .post-info,
+.darkblue-color .tag-cloud a:hover,
+.darkblue-color .post-navigation .pagination > li > a:focus,
+.darkblue-color .post-navigation .pagination > li > a:hover,
+.darkblue-color .post-navigation .pagination > li > span:focus,
+.darkblue-color .post-navigation .pagination > li > span:hover,
+.darkblue-color .post-featured-content blockquote,
+.darkblue-color .gallery-control:hover,
+.darkblue-color .post-type-link,
+.darkblue-color .progress-bar,
+.darkblue-color .skill-counter,
+.darkblue-color .skill-counter::after,
+.darkblue-color input[type="submit"],
+.darkblue-color .contact-form::after,
+.darkblue-color .contact-form::before,
+.darkblue-color .back-to-home a:hover,
+.darkblue-color .back-to-home a:hover,
+.darkblue-color .post-featured-content a.post-lightbox::after,
+.darkblue-color .download-cv a { background-color: #2C3E50 }
+.darkblue-color .entry-summary blockquote,
+.darkblue-color .contact-form,
+.darkblue-color .back-to-home a { border-color: #2C3E50 }
+
+
+.sliver-color a:hover,
+.sliver-color ul.nav.navbar-nav li:hover > a,
+.sliver-color .post-content a:hover,
+.sliver-color .social-profiles a:hover,
+.sliver-color #tweet a,
+.sliver-color .entry-summary a,
+.sliver-color .comment-reply-link,
+.sliver-color .back-to-home a { color: #BDC3C7 }
+.sliver-color .header-top-area,
+.sliver-color .slides .owl-nav > div:hover,
+.sliver-color .slide-text,
+.sliver-color .post-info,
+.sliver-color .tag-cloud a:hover,
+.sliver-color .post-navigation .pagination > li > a:focus,
+.sliver-color .post-navigation .pagination > li > a:hover,
+.sliver-color .post-navigation .pagination > li > span:focus,
+.sliver-color .post-navigation .pagination > li > span:hover,
+.sliver-color .post-featured-content blockquote,
+.sliver-color .gallery-control:hover,
+.sliver-color .post-type-link,
+.sliver-color .progress-bar,
+.sliver-color .skill-counter,
+.sliver-color .skill-counter::after,
+.sliver-color input[type="submit"],
+.sliver-color .contact-form::after,
+.sliver-color .contact-form::before,
+.sliver-color .back-to-home a:hover,
+.sliver-color .back-to-home a:hover,
+.sliver-color .post-featured-content a.post-lightbox::after,
+.sliver-color .download-cv a { background-color: #BDC3C7 }
+.sliver-color .entry-summary blockquote,
+.sliver-color .contact-form,
+.sliver-color .back-to-home a { border-color: #BDC3C7 }
+
+
+.red-color a:hover,
+.red-color ul.nav.navbar-nav li:hover > a,
+.red-color .post-content a:hover,
+.red-color .social-profiles a:hover,
+.red-color #tweet a,
+.red-color .entry-summary a,
+.red-color .comment-reply-link,
+.red-color .back-to-home a { color: #C0392B }
+.red-color .header-top-area,
+.red-color .slides .owl-nav > div:hover,
+.red-color .slide-text,
+.red-color .post-info,
+.red-color .tag-cloud a:hover,
+.red-color .post-navigation .pagination > li > a:focus,
+.red-color .post-navigation .pagination > li > a:hover,
+.red-color .post-navigation .pagination > li > span:focus,
+.red-color .post-navigation .pagination > li > span:hover,
+.red-color .post-featured-content blockquote,
+.red-color .gallery-control:hover,
+.red-color .post-type-link,
+.red-color .progress-bar,
+.red-color .skill-counter,
+.red-color .skill-counter::after,
+.red-color input[type="submit"],
+.red-color .contact-form::after,
+.red-color .contact-form::before,
+.red-color .back-to-home a:hover,
+.red-color .back-to-home a:hover,
+.red-color .post-featured-content a.post-lightbox::after,
+.red-color .download-cv a { background-color: #C0392B }
+.red-color .entry-summary blockquote,
+.red-color .contact-form,
+.red-color .back-to-home a { border-color: #C0392B }

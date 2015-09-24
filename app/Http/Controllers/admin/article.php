@@ -54,8 +54,8 @@ class article extends Controller
         $fileName = explode(".", $file->getClientOriginalName())[0];
         $fileName = $fileName.rand(1,9999).".".$file->getClientOriginalExtension();
         Input::file('image')->move($destinationPath, $fileName);
-        $article->aTitle = $request->aTitle;
-        $article->aDescription = $request->aDes;
+        $article->aTitle = $request->title;
+        $article->aDescription = $request->description;
         $article->cParentID = $request->articleParent;
         $article->cName = $request->cName;
         if(!is_null($file)){

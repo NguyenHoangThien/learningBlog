@@ -1,0 +1,146 @@
+/* Medium Layout: 1280px. */
+@media only screen and (min-width: 992px) and (max-width: 1280px) { 
+    
+}
+/* Tablet Layout: 768px. */
+@media only screen and (min-width: 768px) and (max-width: 991px) { 
+    .logo {padding: 0;}
+    .nav.navbar-nav.navbar-right {margin-top: 0;}  
+    .logo h1 {
+      padding: 20px 0;
+      text-align: center;
+    }   
+    .slide-list {
+      width: 680px;
+    }    
+    .single-slide {
+      height: 390px;
+    }    
+    #instafeed a {
+      width: 63px;
+    } 
+    .header-bottom {
+      position: inherit !important;
+    }  
+    .is-sticky .logo {
+      padding: 0;
+    }    
+    .is-sticky .nav.navbar-nav.navbar-right {
+      margin-top: 0px;
+    }  
+    .nav.navbar-nav.navbar-right {
+      float: none !important;
+      margin-right: 0;text-align: center
+    }    
+    .navbar-nav > li {
+      display: inline-block;
+      float: none;
+    } 
+    .left-sidebar .widget {
+      border-right: 0 solid #f2f2f2;
+      margin-bottom: 70px;
+      padding-right: 0;
+    } 
+    .right-sidebar .widget {
+      border-left: 0 solid #f2f2f2;
+      margin-bottom: 70px;
+      padding-left: 0;
+    }   
+    .right-sidebar {
+      margin-top: 50px;
+    }    
+    
+}
+/* Mobile Layout: 320px. */
+@media only screen and (max-width: 767px) { 
+    .navbar-toggle {
+        border-color: #39CA74;
+        float: none;
+        margin: 0px auto;
+    }
+    .navbar-toggle .icon-bar { background: none repeat scroll 0 0 #39CA74 }
+    .header-left-menu, .social-icon {
+  text-align: center;
+}
+.logo {
+  padding: 10px 0;
+  text-align: center;overflow: hidden
+}    
+
+    .is-sticky .logo {
+      padding: 10px 0;
+    }    
+    .is-sticky .nav.navbar-nav.navbar-right {
+      margin-top: 0px;
+    }  
+    .slide-list {
+      width: 280px;
+    }
+    
+.logo h1{
+  float: left;
+}
+.navbar-header {
+  float: right;
+} 
+.nav.navbar-nav.navbar-right {
+  margin: 0;
+} 
+.slides .owl-nav > div.owl-prev {
+  margin-left: -22px;
+}   
+.slides .owl-nav > div.owl-next {
+  margin-right: -22px;
+}  
+.post-type-link {
+  font-size: 25px;
+  padding: 20px;
+}
+    
+.single-slide {
+  height: inherit;
+} 
+.slide-bg {
+  height: 200px;
+  position: relative;
+}  
+.slide-text {
+  position: relative;
+  width: auto;
+}    
+.slide-text h2 {
+  font-size: 20px;
+  line-height: 28px;
+}    
+.maincontent {
+  padding-top: 50px;
+}
+.posted-by i.fa {
+  margin-left: 5px;
+  margin-right: 0;
+}
+.right-sidebar .widget {
+  border-left: 0 solid #f2f2f2;
+  margin-bottom: 50px;
+  padding-left: 0;
+}
+.footer-widget {
+  padding: 50px 0 0;
+}
+.footer-menu {
+  margin-top: 40px;
+}
+ul.nav.navbar-nav li ul.dropdown-menu li a {
+  text-align: left;
+} 
+.right-sidebar {
+  margin-top: 50px;
+}     
+    
+}
+/* Wide Mobile Layout: 480px. */
+@media only screen and (min-width: 480px) and (max-width: 767px) { 
+    .slide-list {
+      width: 400px;
+    } 
+}

@@ -8,58 +8,70 @@
 			@if($articleID)
 				Add new article
 			@else
-				Edit user
+				Edit article
 			@endif
 		</h1>
 	</div>
 	<div class="col-xs-12">
-		<form class="form-horizontal" enctype="multipart/form-data" role="form" id="form" method="POST" action="/admin/user/store">
-			<!-- avatar section start -->
-			
-			<!-- avatar section end -->
+		<form class="form-horizontal" enctype="multipart/form-data" role="form" id="form" method="POST" action="/admin/article/store">
 			<div class="col-xs-11">
 				<!-- form section start -->
 				<input type="hidden" name="_token" value="{{csrf_token()}}" />
 				<input type="hidden" name="articleID" value="{{$articleID}}" />
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Title :
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+						Title :
 					</label>
 					<div class="col-sm-9">
-						<input type="text" name="title" placeholder="title" value="" class="col-xs-12 col-sm-12" />
+						<input type="text" name="title" placeholder="title" value="{{ $qArticles['aTitle'] }}" class="col-xs-12 col-sm-12" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Category :
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+						Category :
 					</label>
 					<div class="col-sm-9">
 						<select class="col-xs-12 col-sm-12" name="category">
 							<option> choose category</option>
-							<option> category 1</option>
-							<option> category 2</option>
-							<option> category 3</option>
-							<option> category 4</option>
-							<option> category 5</option>
-							<option> category 6</option>
-							<option> category 7</option>
+							<option value="1"> category 1</option>
+							<option value="2"> category 2</option>
+							<option value="3"> category 3</option>
+							<option value="4"> category 4</option>
+							<option value="5"> category 5</option>
+							<option value="6"> category 6</option>
+							<option value="7"> category 7</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Description :
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+						Description :
 					</label>
 					<div class="col-sm-9">
-						<input type="text" name="description" placeholder="Description" value="" class="col-xs-12 col-sm-12" />
+						<input type="text" name="description" placeholder="Description" value="{{ $qArticles['aDescription'] }}" class="col-xs-12 col-sm-12" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Content :
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1">
+						Meta :
 					</label>
 					<div class="col-sm-9">
-						<textarea name="content" id="content" placeholder="content" class="col-xs-12 col-sm-12"></textarea>
+						<input type="text" name="meta" placeholder="meta tag" value="{{ $qArticles['aDescription'] }}" class="col-xs-12 col-sm-12" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Tag :
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		
+						Content :
+					</label>
+					<div class="col-sm-9">
+						<textarea name="content" id="content" placeholder="content" class="col-xs-12 col-sm-12">
+							{!! $qArticles['aContent'] !!}
+						</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		
+						Tag :
 					</label>
 					<div class="col-sm-9">
 						<input type="text" name="tag" placeholder="tag" value="" class="col-xs-12 col-sm-12" />
@@ -67,19 +79,29 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Sort code :
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		
+						Sort code :
 					</label>
 					<div class="col-sm-9">
-						<input type="text" name="title" placeholder="sort code" value="" class="col-xs-3 col-sm-3" />
+						<input type="text" name="sortCode" placeholder="sort code" value="{{ $qArticles['sortCode'] }}" class="col-xs-3 col-sm-3" />
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Active :
-					</label>
-					<div class="col-sm-9">
-						<input type="checkbox" name="Active" checked />
-					</div>
+		      		<label class="control-label col-md-2">Active:</label>
+		        	<span class="col-sm-9">
+						<input id="active" name="active" checked="" type="checkbox" class="ace ace-switch ace-switch-5">
+						<span class="lbl middle"></span>
+					</span>
+		      		<div class="col-md-1"></div>
+		    	</div>
+				<div class="form-group">
+				    <label class="control-label col-md-2">Icon:</label>
+					    <div class="col-md-9">
+					    	<input type="file" class="form-control" id="image" name="image">
+					    	<img src="" id="icon" style="margin-top:5px; max-height: 120px;"/>
+					    </div>
+				    <div class="col-md-1"></div>
 				</div>
 				<!-- form section end -->	
 			</div>
@@ -115,10 +137,6 @@
 	        $('#po').dataTable({
 	            'iDisplayLength': 25
 	        });
-	        // CKEDITOR.replace('content');
-	      //   CKEDITOR.replace( 'content', CKEDITOR.tools.extend( {}, config, {
-							// 	codeSnippet_theme: this.value
-							// }, true ) );
 	    	var config = {
 					extraPlugins: 'codesnippet',
 					codeSnippet_theme: 'monokai_sublime',
@@ -147,7 +165,7 @@
 	        if (lastIndex >= 0) {
 	            filename = filename.substring(lastIndex + 1);
 	        }
-	        readURL(this,"avatar");
+	        readURL(this,"icon");
 	    });
 	</script>
 

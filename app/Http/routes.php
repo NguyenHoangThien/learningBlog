@@ -37,7 +37,9 @@ Route::group(['prefix'=>'admin'], function (){
 	});
 });
 
-
+Route::group(['namespace'=>'user'], function (){
+	Route::get('/', 'home@index');
+});
 
 // Route::group(array('namespace' => 'User'), function (){
 
