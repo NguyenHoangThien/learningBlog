@@ -348,13 +348,13 @@ article.post,
 .related-post-list:after,
 .comment-area:after,
 .page-title:after {
-    background: none repeat scroll 0 0 #f4f4f4;
+    /*background: none repeat scroll 0 0 #f4f4f4;
     bottom: -48px;
     content: "";
     height: 2px;
     left: 0;
     position: absolute;
-    width: 300px;
+    width: 300px;*/
 }
 .page-title::after { bottom: -25px }
 .about-photo { margin-bottom: 30px }
@@ -365,6 +365,7 @@ article.post,
 .social-profiles a { padding-left: 10px }
 /* sidebar css */
 .right-sidebar .widget {
+    padding-top: 25px;
     border-bottom: 1px solid #f1f1f1;
     border-left: 1px solid #f2f2f2;
     margin-bottom: 40px;
@@ -930,8 +931,8 @@ ul.nav.navbar-nav li:hover > a,
 .skill-counter,
 .skill-counter::after,
 input[type="submit"],
-.contact-form::after,
-.contact-form::before,
+/*.contact-form::after,*/
+/*.contact-form::before,*/
 .back-to-home a:hover,
 .back-to-home a:hover,
 .post-featured-content a.post-lightbox::after,

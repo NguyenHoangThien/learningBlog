@@ -21,6 +21,28 @@ class home extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function post()
+    {
+        //
+        return view('user.showthread');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function contact()
+    {
+        //
+        return view('user.contact');
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return Response
