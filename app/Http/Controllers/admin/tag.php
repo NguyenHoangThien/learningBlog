@@ -35,8 +35,9 @@ class tag extends Controller
         }else{
             $tag = new Tags;
         }
-        $tag->tName = $request->tName;
+        $tag->tName        = $request->tName;
         $tag->tDescription = $request->tDes;
+        $tag->tIsActive    = is_null($request->active) ? 0 : 1;
         $tag->save();
         return Redirect::action('admin\tag@index');
     }

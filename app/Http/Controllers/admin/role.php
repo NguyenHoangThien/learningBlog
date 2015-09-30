@@ -35,8 +35,9 @@ class role extends Controller
         }else{
             $role = new Roles;
         }
-        $role->rName = $request->rName;
+        $role->rName        = $request->rName;
         $role->rDescription = $request->rDes;
+        $role->rIsActive    = is_null($request->active) ? 0 : 1;
         $role->save();
         return Redirect::action('admin\role@index');
     }

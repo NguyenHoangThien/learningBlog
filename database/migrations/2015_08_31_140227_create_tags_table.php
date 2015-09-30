@@ -16,6 +16,7 @@ class CreateTagsTable extends Migration
             $table->increments('tID');
             $table->string('tName');
             $table->string('tDescription')->nullable();
+            $table->tinyInteger('tIsActive')->nullable();
         });
     }
 

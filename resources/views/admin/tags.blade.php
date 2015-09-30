@@ -18,6 +18,7 @@
 							<th style="width:5%;text-align:center;">ID</th>
 		                    <th style="width:25%;text-align:center;">Name</th>
 	                        <th style="text-align:center;">Description</th>
+	                        <th style="text-align:center;">Active</th>
 		                    <th style="width:12%"></th>
 		                </tr>
 		            </thead>
@@ -27,6 +28,10 @@
 	                            <td> {{  $tag['tID']}} </td>
 	                            <td id="tName{{ $tag['tID'] }}"> {{  $tag['tName']}} </td>
 	                            <td id="tDes{{ $tag['tID'] }}"> {{  $tag['tDescription']}} </td>
+	                            <td style="text-align:center;">
+	                            	<input type='checkbox' class="ace " id="tActive{{ $tag['tID'] }}" disabled="disable"
+	                            		<?php if($tag['tIsActive']) echo "checked";?>><label class="lbl" for="ace-settings-navbar"> 
+	                            </td>
 	                            <td style="text-align:center;">
 	                                <i class="btn btn-mini btn-success ace-icon fa fa-pencil green" title="edit"
 	                                onclick="editTag({{ $tag['tID'] }});"
@@ -76,6 +81,15 @@
 							    </div>
 							    <div class="col-md-1"></div>
 						    </div>
+
+						    <div class="form-group">
+					      		<label class="control-label col-md-2">Active:</label>
+					        	<span class="col-sm-9">
+									<input id="active" name="active" checked="" type="checkbox" class="ace ace-switch ace-switch-5">
+									<span class="lbl middle"></span>
+								</span>
+					      		<div class="col-md-1"></div>
+					    	</div>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -114,6 +128,11 @@
  		$("#tName").val($("#tName" + tID).text());
  		$("#tDes").val($("#tDes" + tID).text());
 		$("#titleForm").text("Edit Tag");
+		if($("#tActive"+tID).attr("checked")){
+			$("#active").attr("checked","checked");
+		}else{
+			$("#active").removeAttr("checked");
+		}
 		$("#category-form").modal('show');
  	}
 	function addForm() {

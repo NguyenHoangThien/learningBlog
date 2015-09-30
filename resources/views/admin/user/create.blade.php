@@ -1,6 +1,7 @@
 @extends('admin.layout')
 @section('hearderLink')
 	<link rel="stylesheet" href="/assets/css/adminUserPage.css" />
+	<link rel="stylesheet" href="/ACEAdmin/assets/css/datepicker.css" />
 @stop
 @section('content')
 	<div class="page-header">
@@ -39,17 +40,17 @@
 				<input type="hidden" name="_token" value="{{csrf_token()}}" />
 				<input type="hidden" name="userID" value="{{$userID}}" />
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Username :
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Username (*):
 					</label>
 					<div class="col-sm-9">
-						<input type="text" name="username" id="form-field-1" placeholder="Username" value="{{ $qUsers['uUsername'] }}" class="col-xs-10 col-sm-5" />
+						<input type="text" name="username" id="form-field-1" placeholder="Username" value="{{ $qUsers['uUsername'] }}" class="col-xs-10 col-sm-5" required pattern=".{5,32}" required title="required 5 to 32 characters"/>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Email : 
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Email (*): 
 					</label>
 					<div class="col-sm-9">
-						<input type="email" name="email" id="form-field-1" placeholder="Email" class="col-xs-10 col-sm-5" value="{{ $qUsers['uEmail'] }}"/>
+						<input type="text" name="email" id="form-field-1" placeholder="Email" class="col-xs-10 col-sm-5" value="{{ $qUsers['uEmail'] }}" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" title="email invalid !" required/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -61,27 +62,38 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Password : 
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Password (*): 
 					</label>
 					<div class="col-sm-9">
-						<input type="password" name="password" id="form-field-1" placeholder="Password" class="col-xs-10 col-sm-5" />
+						<input type="password" name="password" id="form-field-1" placeholder="Password" 
+						title="Password must contain at least 6 characters" type="password" required pattern=".{6,32}" onchange="
+						this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
+						if(this.checkValidity()) form.rePassword.pattern = this.value;"
+						class="col-xs-10 col-sm-5" />
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Retype pass : 
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Retype pass (*): 
 					</label>
 					<div class="col-sm-9">
-						<input type="password" name="rePassword" id="form-field-1" placeholder="Retype Password" class="col-xs-10 col-sm-5" />
+						<input type="password" name="rePassword" id="form-field-1" placeholder="Retype Password"
+						title="Please enter the same Password as above" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="pwd2" onchange="
+  						this.setCustomValidity(this.validity.patternMismatch ? this.title : '');"
+						class="col-xs-10 col-sm-5" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Birthday : 
+					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Birthday (*): 
 					</label>
 					<div class="col-sm-9">
-						<input type="text" name="birthday" id="form-field-1" placeholder="Birthday" value="{{ $qUsers['uBirthday'] }}" class="col-xs-10 col-sm-5" />
+						<input type="text" name="birthday" id="form-field-1" placeholder="Birthday" value="{{ $qUsers['uBirthday'] }}" class="col-xs-10 col-sm-5 date-picker" />
+						{{-- <span class="input-group-addon col-xs-1 col-sm-1">
+							<i class="fa fa-calendar bigger-110"></i>
+						</span> --}}
 					</div>
 				</div>
+
 				<div class="form-group">
 					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Phone : 
 					</label>
@@ -117,6 +129,7 @@
 	<script src="/ACEAdmin/assets/js/jquery.dataTables.min.js"></script>
 	<script src="/ACEAdmin/assets/js/jquery.dataTables.bootstrap.js"></script>
 	<script src="/ACEAdmin/assets/js/chosen.jquery.min.js"></script>
+	<script src="/ACEAdmin/assets/js/date-time/bootstrap-datepicker.min.js"></script>
 	<script src="/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript">
 	    $(document).ready(function(){
@@ -146,6 +159,10 @@
 	        }
 	        readURL(this,"avatar");
 	    });
+	    $('.date-picker').datepicker({
+			autoclose: true,
+			todayHighlight: true
+		})
 	</script>
 
 @stop
