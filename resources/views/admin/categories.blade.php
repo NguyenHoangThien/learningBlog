@@ -20,28 +20,34 @@
 		                    <th style="width:25%;text-align:center;">Name</th>
 	                        <th style="text-align:center;">Description</th>
 	                        <th style="text-align:center;">Caregory Parent</th>
+	                        <th style="text-align:center;">Active</th>
 		                    <th style="width:12%"></th>
 		                </tr>
 		            </thead>
 	                <tbody>
 	                	@foreach ($qGetCategories as $category) 
 	                        <tr>
-	                            <td style="text-align:center;"> {{ $category['cID'] }} </td>
-	                            @if(is_null($category['cIcon']))
-	                            	<td><img id="cIcon{{ $category['cID'] }}" src="/assets/img/default.jpg" width="80px" /></td>
+	                            <td style="text-align:center;"> {{ $category->cID }} </td>
+	                            @if(is_null($category->cIcon))
+	                            	<td><img id="cIcon{{ $category->cID }}" src="/assets/img/default.jpg" width="80px" /></td>
 	                            @else
-	                            	<td><img id="cIcon{{ $category['cID'] }}" src="/assets/images/{{$category['cIcon']}}" width="80px"/></td>
+	                            	<td><img id="cIcon{{ $category->cID }}" src="/assets/images/{{$category->cIcon}}" width="80px"/></td>
 	                            @endif
-	                            <td id="cName{{ $category['cID'] }}"> {{ $category['cName'] }} </td>
-	                            <td id="cDes{{ $category['cID'] }}"> {{ $category['cDescription'] }} </td>
-	                            <td id="cParent{{ $category['cID'] }}"> {{ $category['cParentID'] }} </td>
+	                            <td id="cName{{ $category->cID }}">{{ $category->cName }}</td>
+	                            <td id="cDes{{ $category->cID }}"> {{ $category->cDescription }} </td>
+	                            <td id="cParent{{ $category->cID }}">{{$category->parentName}}</td>
 	                            <td style="text-align:center;">
-	                            	@if($category['cID'] != 1)
+	                            	<input type='checkbox' class="ace " id="cActive{{ $category->cID }}" disabled="disable"
+	                            		<?php if($category->cIsActive) echo "checked";?>><label class="lbl" for="ace-settings-navbar"> 
+	                            </td>
+
+	                            <td style="text-align:center;">
+	                            	@if($category->cID != 1)
 	                                <i class="btn btn-mini btn-success ace-icon fa fa-pencil green" title="edit"
-	                                onclick="editCategory({{ $category['cID'] }});"
+	                                onclick="editCategory({{ $category->cID }});"
 	                                ></i>
 	                                <i class="btn btn-mini btn-danger ace-icon fa fa-trash red" title="edit"
-	                                onclick="deleteCategory({{ $category['cID'] }});"
+	                                onclick="deleteCategory({{ $category->cID }});"
 	                                ></i>
 	                                @endif
 	                            </td>
@@ -74,7 +80,7 @@
 						    <div class="form-group">
 							    <label class="control-label col-md-2">Name:</label>
 							    <div class="col-md-9">
-							    	<input type="text" class="form-control" name="cName" id="cName">
+							    	<input type="text" class="form-control" name="cName" id="cName" required>
 						    	</div>
 						    	<div class="col-md-1"></div>
 						    </div>
@@ -92,14 +98,23 @@
 									<div class="col-md-9">
 										<select name="categoryParent" id="categoryParent">
 											@foreach ($qGetCategories as $category)
-												<option value="{{ $category['cID'] }}">
-													{{ $category['cName'] }}
+												<option value="{{ $category->cID }}">
+													{{ $category->cName }}
 												</option>
 											@endforeach
 										</select>
 									</div>
 								<div class="col-md-1"></div>
 						    </div>
+
+						    <div class="form-group">
+					      		<label class="control-label col-md-2">Active:</label>
+					        	<span class="col-sm-9">
+									<input id="active" name="active" checked="" type="checkbox" class="ace ace-switch ace-switch-5">
+									<span class="lbl middle"></span>
+								</span>
+					      		<div class="col-md-1"></div>
+					    	</div>
 
 						    <div class="form-group">
 							    <label class="control-label col-md-2">Icon:</label>
@@ -133,12 +148,7 @@
 	        $('#po').dataTable({
 	            'iDisplayLength': 25
 	        });
-	        // CKEDITOR.replace('aDes');
-	        // CKEDITOR.replace('eDes');
-	        // if($('#txtIsAddMore').val()==1){
-	        //     $("#add-MatchType").modal('show');
-	        //     $("#isAddMore").prop('checked',true);
-	        // }
+
 	        $.ajaxSetup({
 		        headers: {
 		            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -147,34 +157,31 @@
 
 	    });
 
-		// function showedit(id){
-	 //        $("#edit-MatchType").modal('show');
-	 //        $("#eName").val($("#Name"+id).text());
-	 //        $("#idEdit").val(id); 
-	 //        CKEDITOR.instances.eDes.setData($("#Des"+id).text(), function()
-	 //        {
-	 //            this.checkDirty();  // true
-	 //        });
-	 //    }
-	 //    function showForm(){
-	 //    	$("#add-MatchType").modal('show');
-	 //    }
 	 	function editCategory(cID){
 	 		$("#cID").val(cID);
 	 		$("#cName").val($("#cName" + cID).text());
 	 		$("#cDes").val($("#cDes" + cID).text());
 	 		$("#aIfile").attr("src", $("#cIcon" + cID).attr("src"));
-	 		$("#categoryParent").val( + $("#cParent" + cID).text());
+	 		$("#categoryParent option").show();
+	 		$("#categoryParent option:contains("+$("#cParent" + cID).text()+")").attr('selected', true);
+	 		$("#categoryParent option:contains("+$("#cName" + cID).text()+")").hide();
 			$("#titleForm").text("Edit Category");
+
+			if($("#cActive"+cID).attr("checked")){
+				$("#active").attr("checked","checked");
+			}else{
+				$("#active").removeAttr("checked");
+			}
+
 			$("#category-form").modal('show');
 	 	}
 		function addForm() {
 			document.getElementById("form").reset();
+			$("#categoryParent option").show();
 			$("#cID").val(0);
 			$("#aIfile").attr("src", "");
 			$("#category-form").modal('show');
 			$("#titleForm").text("Add new Category");
-
 		}
 		function readURL(input,imgtag) {
 	        if (input.files && input.files[0]) {

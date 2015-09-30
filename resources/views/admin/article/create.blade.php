@@ -95,6 +95,7 @@
 					</span>
 		      		<div class="col-md-1"></div>
 		    	</div>
+		    	
 				<div class="form-group">
 				    <label class="control-label col-md-2">Icon:</label>
 					    <div class="col-md-9">

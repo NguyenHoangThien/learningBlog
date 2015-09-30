@@ -10,6 +10,7 @@ use App\Models\Categories;
 use Input;
 use File;
 use Redirect;
+use DB;
 class category extends Controller
 {
     /**
@@ -19,7 +20,8 @@ class category extends Controller
      */
     public function index()
     {
-        $qGetCategories = Categories::all();   
+        $qGetCategories = DB::select('SELECT c.*,parent.cName as parentName from categories c LEFT JOIN ( SELECT * from categories ) as parent ON c.cParentID = parent.cID');
+        // $qGetCategories = Categories::all();   
         return view('admin.categories',compact('qGetCategories'));
     }
 
@@ -30,8 +32,7 @@ class category extends Controller
      * @return Response
      */
     public function store(Request $request)
-    {
-        // dd($request);
+    {   
         if($request->cID){
             $category = Categories::where("cID",$request->cID)->first();
         }else{
@@ -41,7 +42,7 @@ class category extends Controller
         $category->cName        = $request->cName;
         $category->cDescription = $request->cDes;
         $category->cParentID    = $request->categoryParent;
-        $category->cName        = $request->cName;
+        $category->cIsActive    = is_null($request->active) ? 0 : 1;
         $file = Input::file('image');
         if(!is_null($file)){
             $destinationPath = public_path().'/assets/images/';
