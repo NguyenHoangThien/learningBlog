@@ -21,6 +21,6 @@
     @yield('header')
 </head>
 
-<div id="preloader">
+{{-- <div id="preloader">
     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-</div>
+</div> --}}

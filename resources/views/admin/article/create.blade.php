@@ -1,6 +1,10 @@
 @extends('admin.layout')
 @section('hearderLink')
 	<link rel="stylesheet" href="/assets/css/adminUserPage.css" />
+
+	<link rel="stylesheet" href="/ACEAdmin/assets/css/chosen.css" /> <!-- for multi choose tag --> 
+	<!-- ace styles -->
+	<link rel="stylesheet" href="/ACEAdmin/assets/css/ace.min.css" />
 @stop
 @section('content')
 	<div class="page-header">
@@ -23,7 +27,7 @@
 						Title :
 					</label>
 					<div class="col-sm-9">
-						<input type="text" name="title" placeholder="title" value="{{ $qArticles['aTitle'] }}" class="col-xs-12 col-sm-12" />
+						<input type="text" name="title" placeholder="title" value="{{ $qArticles['aTitle'] }}" class="col-xs-12 col-sm-12" required minlength="6" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -32,14 +36,9 @@
 					</label>
 					<div class="col-sm-9">
 						<select class="col-xs-12 col-sm-12" name="category">
-							<option> choose category</option>
-							<option value="1"> category 1</option>
-							<option value="2"> category 2</option>
-							<option value="3"> category 3</option>
-							<option value="4"> category 4</option>
-							<option value="5"> category 5</option>
-							<option value="6"> category 6</option>
-							<option value="7"> category 7</option>
+							@foreach ($qCategories as $category) 
+								<option value={{$category['cID']}}>{{$category['cName']}}</option>
+							@endforeach
 						</select>
 					</div>
 				</div>
@@ -66,15 +65,21 @@
 					<div class="col-sm-9">
 						<textarea name="content" id="content" placeholder="content" class="col-xs-12 col-sm-12">
 							{!! $qArticles['aContent'] !!}
+							aaaaaaa
 						</textarea>
 					</div>
 				</div>
+
 				<div class="form-group">
-					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		
-						Tag :
-					</label>
-					<div class="col-sm-9">
-						<input type="text" name="tag" placeholder="tag" value="" class="col-xs-12 col-sm-12" />
+					<label class="control-label col-md-2">Tag:</label>
+					<div class="col-md-9">
+						<select multiple name="tags[]" class="chosen-select tag-input-style" id="form-field-select-4" data-placeholder="Choose a State...">
+							@foreach ($qTags as $tag)
+								{{-- $os = array("Mac", "NT", "Irix", "Linux"); --}}
+								{{-- in_array("Irix", $os) --}}
+								<option value="{{$tag['tName']}}" selected>{{$tag['tName']}}</option>
+							@endforeach
+						</select>
 					</div>
 				</div>
 
@@ -83,7 +88,7 @@
 						Sort code :
 					</label>
 					<div class="col-sm-9">
-						<input type="text" name="sortCode" placeholder="sort code" value="{{ $qArticles['sortCode'] }}" class="col-xs-3 col-sm-3" />
+						<input type="text" name="sortCode" placeholder="sort code" value="{{ $qArticles['sortCode'] }}" class="col-xs-1 col-sm-1" />
 					</div>
 				</div>
 
@@ -104,8 +109,11 @@
 					    </div>
 				    <div class="col-md-1"></div>
 				</div>
+
+				
 				<!-- form section end -->	
 			</div>
+
 			<div class="col-xs-12">
 				<div class="clearfix form-actions">
 					<div class="col-md-offset-3 col-md-9">
@@ -133,6 +141,7 @@
 	<script src="/ACEAdmin/assets/js/jquery.dataTables.bootstrap.js"></script>
 	<script src="/ACEAdmin/assets/js/chosen.jquery.min.js"></script>
 	<script src="/ckeditor/ckeditor.js"></script>
+	<script src="/ckfinder/ckfinder.js"></script>
 	<script type="text/javascript">
 	    $(document).ready(function(){
 	        $('#po').dataTable({
@@ -143,13 +152,23 @@
 					codeSnippet_theme: 'monokai_sublime',
 					height: 356
 				};
-			CKEDITOR.replace('content', config );
+			var editor = CKEDITOR.replace('content', config );
+			CKFinder.setupCKEditor( editor, '/ckfinder/' );
 
 	        $.ajaxSetup({
 		        headers: {
 		            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		        }
 			});
+
+			$('.chosen-select').chosen({allow_single_deselect:true});
+			// .trigger("chosen:updated"); 
+
+			//resize the chosen on window resize
+			$(window).on('resize.chosen', function() {
+				var w = $('.chosen-select').parent().width();
+				$('.chosen-select').next().css({'width':w});
+			}).trigger('resize.chosen');
 	    });
 	    function readURL(input,imgtag) {
 	        if (input.files && input.files[0]) {
