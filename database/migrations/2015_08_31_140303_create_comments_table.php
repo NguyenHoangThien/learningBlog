@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->string('comContent');
             $table->integer('aID');
             $table->integer('uID');
+            $table->dateTime('dateComment');
         });
     }
 

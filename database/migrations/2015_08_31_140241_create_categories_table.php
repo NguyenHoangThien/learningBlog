@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('cName');
             $table->string('cIcon')->nullable();
             $table->tinyInteger('cIsActive');
+            $table->integer('cLevel')->default(1);
             $table->integer('cParentID')->nullable();
         });
     }

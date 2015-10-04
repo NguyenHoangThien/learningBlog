@@ -46,7 +46,7 @@ Route::group(['prefix'=>'admin'], function (){
 
 Route::group(['namespace'=>'user'], function (){
 	Route::get('/', 'home@index');
-	Route::get('/post', 'home@post');
+	Route::get('/show-post', 'home@post');
 	Route::get('/contact', 'home@contact');
 });
 

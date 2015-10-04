@@ -46,12 +46,12 @@
 					<li class="">
 						<a href="/admin/role">
 							<i class="menu-icon fa fa-caret-right"></i>
-							Tags
+							Roles
 						</a>
 						<b class="arrow"></b>
 					</li>
 					<li class="">
-						<a href="mobile-menu-3.html">
+						<a href="/admin/user">
 							<i class="menu-icon fa fa-caret-right"></i>
 							Users
 						</a>

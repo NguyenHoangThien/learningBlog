@@ -1,23 +1,35 @@
 <div class="col-sm-4">
     <div class="right-sidebar">
         <div class="widget">
-            <img class="about-photo" src="/user/img/photo.jpg" alt="">
+            <img class="about-photo" src="/user/img/photo.png" style="width:150px;height:150px" alt="">
             <h2 class="widget-title">ABOUT ME</h2>
-            <p>Welcome to Dinlipi.<br/>
-            I'm Rasel Ahamed - Web Developer from Bangladesh. I love to do coding and love to watch movies and playing cricket.</p>
-            <p class="social-profiles">Join me: <a href="http://facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a> <a href="http://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a> <a href="http://plus.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a> <a href="http://pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i></a></p>     
+            <p>Welcome to My Blog<br/>
+            My name Thien - Web Developer .</p>
+            <p class="social-profiles">Join me: <a href="http://facebook.com/tinypro" target="_blank"><i class="fa fa-facebook"></i></a> <a href="http://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a> <a href="http://plus.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a> <a href="http://pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i></a></p>     
         </div>
         
         <div class="widget">
             <h2 class="widget-title">Categories</h2>
             <ul>
-                <li><a href="archive.html">Entertainment</a></li>
-                <li><a href="archive.html">Sports</a></li>
-                <li><a href="archive.html">Travel</a></li>
-                <li><a href="archive.html">Lifestyle</a></li>
-                <li><a href="archive.html">Jobs</a></li>
-                <li><a href="archive.html">Movies</a></li>
-                <li><a href="archive.html">Music</a></li>
+                @foreach ($qGetCategories as $category)
+                    @if($category['cParentID'] == 1 )
+                        <li>
+                            <a href="/category/{{$category['cName']}}"> 
+                                {!!$category['cName']!!} 
+                            </a>
+                        </li>
+                        @foreach ($qGetCategories as $categorySub)
+                            @if($categorySub['cParentID'] == $category['cID'])
+                                <li>
+                                    <i class="fa fa-caret-right"></i> 
+                                    <a href="/category/{{$categorySub['cName']}}"> 
+                                        {!!$categorySub['cName']!!} 
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach  
+                    @endif
+                @endforeach
             </ul>
         </div>
         
@@ -63,12 +75,9 @@
         <div class="widget">
             <h2 class="widget-title">Tags</h2>
             <div class="tag-cloud">
-                <a href="/user/archive.html">Entertainment</a>
-                <a href="/user/archive.html">Sports</a>
-                <a href="/user/archive.html">Travel</a>
-                <a href="/user/archive.html">Lifestyle</a>
-                <a href="/user/archive.html">Movies</a>
-                <a href="/user/archive.html">Music</a>
+                @foreach ($qGetTags as $tag) 
+                    <a href="/tag/{{$tag['tName']}}">{!!$tag['tName']!!}</a>
+                @endforeach
             </div>
         </div>
     </div>

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Articles;
+use App\Models\Users;
+use App\Models\Categories;
+use App\Models\Tags;
 
 class home extends Controller
 {
@@ -14,10 +18,28 @@ class home extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request) 
     {
         //
-        return view('user.index');
+        $offset = 3;
+        if(is_null($request->page) || !$request->page){
+            $page = 1;
+        }else{
+            $page = $request->page;
+        }
+        $from = ( $page - 1 ) * $offset;
+        $to = $from + $offset;
+        $total = Articles::where('aIsActive',1)->get()->count();
+        $qGetTags = Tags::all();
+        $qGetCategories = Categories::where('cID','!=',1)->get();
+        $qGetArticles = Articles::where('aIsActive',1)
+                                ->leftJoin('categories', 'categories.cID', '=', 'articles.cID')
+                                ->leftJoin('users','users.uID','=','articles.uID')
+                                ->orderBy('articles.aCreatedDate','DESC')
+                                ->skip($from)->take($to)
+                                ->get();
+        // dd($total);
+        return view('user.index', compact('qGetTags', 'qGetCategories', 'qGetArticles', 'total', 'page', 'offset'));
     }
 
     /**
@@ -25,10 +47,22 @@ class home extends Controller
      *
      * @return Response
      */
-    public function post()
+    public function post(Request $request)
     {
-        //
-        return view('user.showthread');
+        if(is_null($request->a) || !$request->a){
+            //throw it in to page 404
+        }else{
+            $qGetTags = Tags::all();
+            $qGetCategories = Categories::where('cID','!=',1)->get();
+
+        }
+        $qArticle = Articles::where('aIsActive',1)->where('aID',$request->a)
+                                ->leftJoin('categories', 'categories.cID', '=', 'articles.cID')
+                                ->leftJoin('users','users.uID','=','articles.uID')
+                                ->first();
+        // dd($total);
+        return view('user.show-post', compact('qGetTags', 'qGetCategories', 'qArticle'));
+
     }
 
     /**
