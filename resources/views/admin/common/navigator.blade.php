@@ -6,47 +6,54 @@
 		</a>
 		<b class="arrow"></b>
 	</li>
-	<li class="">
+	<li class="hsub open">
 		<a href="#" class="dropdown-toggle">
 			<i class="menu-icon fa fa-desktop"></i>
 			<span class="menu-text"> UI &amp; Elements </span>
 			<b class="arrow fa fa-angle-down"></b>
 		</a>
 		<b class="arrow"></b>
-		<ul class="submenu">
+		<ul class="submenu nav-show" style="display: block;">
 			<li class="">
 				<a href="#" class="dropdown-toggle">
 					<i class="menu-icon fa fa-caret-right"></i>
-						Layouts
+						Management
 					<b class="arrow fa fa-angle-down"></b>
 				</a>
 				<b class="arrow"></b>
 				<ul class="submenu">
 					<li class="">
-						<a href="top-menu.html">
+						<a href="/admin/category">
 							<i class="menu-icon fa fa-caret-right"></i>
-							Top Menu
+							Categories
 						</a>
 						<b class="arrow"></b>
 					</li>
 					<li class="">
-						<a href="mobile-menu-1.html">
+						<a href="/admin/article/create">
 							<i class="menu-icon fa fa-caret-right"></i>
-							Default Mobile Menu
+							Articles
 						</a>
 						<b class="arrow"></b>
 					</li>
 					<li class="">
-						<a href="mobile-menu-2.html">
+						<a href="/admin/tag">
 							<i class="menu-icon fa fa-caret-right"></i>
-							Mobile Menu 2
+							Tags
+						</a>
+						<b class="arrow"></b>
+					</li>
+					<li class="">
+						<a href="/admin/role">
+							<i class="menu-icon fa fa-caret-right"></i>
+							Tags
 						</a>
 						<b class="arrow"></b>
 					</li>
 					<li class="">
 						<a href="mobile-menu-3.html">
 							<i class="menu-icon fa fa-caret-right"></i>
-							Mobile Menu 3
+							Users
 						</a>
 						<b class="arrow"></b>
 					</li>
@@ -68,84 +75,11 @@
 
 				<b class="arrow"></b>
 			</li>
-			<li class="">
-				<a href="buttons.html">
-					<i class="menu-icon fa fa-caret-right"></i>
-					Buttons &amp; Icons
-				</a>
-
-				<b class="arrow"></b>
-			</li>
-			<li class="">
-				<a href="treeview.html">
-					<i class="menu-icon fa fa-caret-right"></i>
-					Treeview
-				</a>
-
-				<b class="arrow"></b>
-			</li>
-			<li class="">
-				<a href="jquery-ui.html">
-					<i class="menu-icon fa fa-caret-right"></i>
-					jQuery UI
-				</a>
-
-				<b class="arrow"></b>
-			</li>
-			<li class="">
-				<a href="nestable-list.html">
-					<i class="menu-icon fa fa-caret-right"></i>
-					Nestable Lists
-				</a>
-
-				<b class="arrow"></b>
-			</li>
-			<li class="">
-				<a href="#" class="dropdown-toggle">
-					<i class="menu-icon fa fa-caret-right"></i>
-						Three Level Menu
-					<b class="arrow fa fa-angle-down"></b>
-				</a>
-				<b class="arrow"></b>
-				<ul class="submenu">
-					<li class="">
-						<a href="#">
-							<i class="menu-icon fa fa-leaf"></i>
-							Item #1
-						</a>
-						<b class="arrow"></b>
-					</li>
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-pencil"></i>
-							4th level
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-						<b class="arrow"></b>
-						<ul class="submenu">
-							<li class="">
-								<a href="#">
-									<i class="menu-icon fa fa-plus"></i>
-									Add Product
-								</a>
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="#">
-									<i class="menu-icon fa fa-eye"></i>
-									View Products
-								</a>
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</li>
 		</ul>
 	</li>
 	
 
-	<li class="">
+	{{-- <li class="">
 		<a href="gallery.html">
 			<i class="menu-icon fa fa-picture-o"></i>
 			<span class="menu-text"> Gallery </span>
@@ -184,5 +118,5 @@
 			</li>
 
 		</ul>
-	</li>
+	</li> --}}
 </ul>

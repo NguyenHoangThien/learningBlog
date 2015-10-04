@@ -11,9 +11,15 @@
 |
 */
 
-
 Route::group(['prefix'=>'admin'], function (){
-	Route::group(['namespace'=>'admin'], function (){
+	Route::group(['namespace'=>'admin', 'middleware'=>'auth'], function (){
+		Route::get('/login', 'login@index');
+		Route::post('/login/auth', 'login@auth');
+		Route::get('/logout', function(){
+			Session::flush();
+			return redirect('/admin/login');
+		});
+
 		Route::get('/category', 'category@index');
 		Route::post('/categoryStore', 'category@store');
 		Route::post('/deleteCategory', 'category@destroy');
@@ -34,13 +40,14 @@ Route::group(['prefix'=>'admin'], function (){
 		Route::get('/article', 'article@index');
 		Route::get('/article/create', 'article@create');
 		Route::post('/article/store', 'article@store');
+
 	});
 });
 
 Route::group(['namespace'=>'user'], function (){
 	Route::get('/', 'home@index');
-	Route::get('/post','home@post');
-	Route::get('/contact','home@contact');
+	Route::get('/post', 'home@post');
+	Route::get('/contact', 'home@contact');
 });
 
 // Route::group(array('namespace' => 'User'), function (){

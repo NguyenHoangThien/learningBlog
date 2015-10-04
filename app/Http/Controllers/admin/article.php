@@ -12,6 +12,7 @@ use App\Models\Tags;
 use Input;
 use File;
 use Redirect;
+use Session;
 class article extends Controller
 {
     /**
@@ -77,7 +78,7 @@ class article extends Controller
         $article->aContent = $request->content;
         $article->aMeta = $request->meta;
         $article->aTag = implode(",", $request->tags);
-        $article->uID = 1;
+        $article->uID = Session::get("userID");
         $article->aIsActive = is_null($request->active) ? 0 : 1;
         $article->sortCode = $request->sortCode;
         $article->save();

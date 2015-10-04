@@ -4,6 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Session;
+use Request;
+use Route;
 
 class Authenticate
 {
@@ -34,14 +37,20 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->guest()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('auth/login');
-            }
-        }
+        // if ($this->auth->guest()) {
+        //     if ($request->ajax()) {
+        //         return response('Unauthorized.', 401);
+        //     } else {
+        //         return redirect()->guest('auth/login');
+        //     }
+        // }
 
+        // return $next($request);
+        $path      = Request::path();
+        $flag      = $path == "admin" || $path == "admin/login" || $path == "admin/login/auth";
+        if(!Session::get('userID') && !$flag){
+            return redirect('/admin/login');
+        }
         return $next($request);
     }
 }

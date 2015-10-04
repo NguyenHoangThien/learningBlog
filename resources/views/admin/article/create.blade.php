@@ -65,7 +65,6 @@
 					<div class="col-sm-9">
 						<textarea name="content" id="content" placeholder="content" class="col-xs-12 col-sm-12">
 							{!! $qArticles['aContent'] !!}
-							aaaaaaa
 						</textarea>
 					</div>
 				</div>
@@ -75,9 +74,12 @@
 					<div class="col-md-9">
 						<select multiple name="tags[]" class="chosen-select tag-input-style" id="form-field-select-4" data-placeholder="Choose a State...">
 							@foreach ($qTags as $tag)
-								{{-- $os = array("Mac", "NT", "Irix", "Linux"); --}}
-								{{-- in_array("Irix", $os) --}}
-								<option value="{{$tag['tName']}}" selected>{{$tag['tName']}}</option>
+								<option value="{{$tag['tName']}}" 
+								<?php 
+									if(in_array($tag['tName'],$qArticles['aTag']))
+										echo 'selected';
+								?>
+								>{{$tag['tName']}}</option>
 							@endforeach
 						</select>
 					</div>

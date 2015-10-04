@@ -267,7 +267,7 @@
 					<img class="nav-user-photo" src="/ACEAdmin/assets/avatars/user.jpg" alt="Jason's Photo" />
 					<span class="user-info">
 						<small>Welcome,</small>
-						Jason
+						    {{Session::get('username')}}
 					</span>
 
 					<i class="ace-icon fa fa-caret-down"></i>
@@ -291,7 +291,7 @@
 					<li class="divider"></li>
 
 					<li>
-						<a href="#">
+						<a href="/admin/logout">
 							<i class="ace-icon fa fa-power-off"></i>
 							Logout
 						</a>

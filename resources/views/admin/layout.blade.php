@@ -47,14 +47,11 @@
 		if('ontouchstart' in document.documentElement) document.write("<script src='/ACEAdmin/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 	</script>
 	<script type="text/javascript">
-		// try{
-		// 	ace.settings.check('main-container' , 'fixed');
-		// 	ace.settings.check('sidebar' , 'fixed');
-		// 	ace.settings.check('sidebar' , 'collapsed');
-		// 	ace.settings.check('breadcrumbs' , 'fixed');
-		// }catch(e){
-		// 	console.log(e);
-		// }
+		var pathname = location.pathname;
+		var $menuChoose  = $("ul li a[href='"+pathname+"']");
+		$menuChoose.parent().parent().css('display','block');
+		$menuChoose.parent().parent().parent().addClass('open');
+		$menuChoose.css("background-color","aliceblue");
 	</script>
 	@yield('footer')
 </html>

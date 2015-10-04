@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('uPhone')->nullable();
             $table->date('uRegisteredDate');
             $table->tinyInteger('uIsActive');
+            $table->tinyInteger('uGender')->nullable();
             $table->integer('uRole');
         });
     }
