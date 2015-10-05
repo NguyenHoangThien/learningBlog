@@ -44,14 +44,37 @@ Route::group(['prefix'=>'admin'], function (){
 	});
 });
 
-Route::group(['namespace'=>'user'], function (){
-	Route::get('/', 'home@index');
-	Route::get('/show-post', 'home@post');
-	Route::get('/contact', 'home@contact');
+Route::bind('searchTag', function($tag){
+	return App\models\Articles::where('aTag','like','%'.$tag.'%')
+								->leftJoin('categories', 'categories.cID', '=', 'articles.cID')
+                                ->leftJoin('users','users.uID','=','articles.uID');
 });
 
-// Route::group(array('namespace' => 'User'), function (){
+Route::bind('searchCategory', function($category){
+	return App\models\Articles::where('cName',$category)
+								->leftJoin('categories', 'categories.cID', '=', 'articles.cID')
+                                ->leftJoin('users','users.uID','=','articles.uID');
+});
 
+Route::bind('post',function($id){
+	return App\models\Articles::where('aIsActive',1)->where('aID',$id)
+                                ->leftJoin('categories', 'categories.cID', '=', 'articles.cID')
+                                ->leftJoin('users','users.uID','=','articles.uID')
+                                ->first();
+});
+
+Route::group(['namespace'=>'user'], function (){
+	Route::get('/', 'home@index');
+	Route::get('/show-post/{post}', 'home@post');
+	Route::get('/contact', 'home@contact');
+	Route::get('/search/tag/{searchTag}','home@searchTag');
+	Route::get('/search/category/{searchCategory}','home@searchCategory');
+});
+
+
+
+
+// Route::group(array('namespace' => 'User'), function (){
 // });
 // Route::group(['prefix' => 'admin','middleware'=>'auth'], function () {
 // 	Route::group(array('namespace' => 'Admin'), function (){

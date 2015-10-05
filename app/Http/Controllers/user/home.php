@@ -18,10 +18,27 @@ class home extends Controller
      *
      * @return Response
      */
-    public function index(Request $request) 
+    protected $offset = 5;
+    public function index( Request $request , Articles $articles) 
     {
-        //
-        $offset = 3;
+        $articles = $articles->leftJoin('categories', 'categories.cID', '=', 'articles.cID')
+                            ->leftJoin('users','users.uID','=','articles.uID');
+        echo $this->search($request, $articles);
+    }
+
+    public function searchTag( Request $request, $searchTag ) 
+    {
+       echo $this->search($request, $searchTag);
+    }
+
+    public function searchCategory( Request $request, $searchCategory ) 
+    {
+        echo $this->search($request,$searchCategory);
+    }
+
+    public function search(Request $request, $articles)
+    {
+        $offset = $this->offset;
         if(is_null($request->page) || !$request->page){
             $page = 1;
         }else{
@@ -29,38 +46,26 @@ class home extends Controller
         }
         $from = ( $page - 1 ) * $offset;
         $to = $from + $offset;
-        $total = Articles::where('aIsActive',1)->get()->count();
+        $total = $articles->where('aIsActive',1)->get()->count();
         $qGetTags = Tags::all();
         $qGetCategories = Categories::where('cID','!=',1)->get();
-        $qGetArticles = Articles::where('aIsActive',1)
-                                ->leftJoin('categories', 'categories.cID', '=', 'articles.cID')
-                                ->leftJoin('users','users.uID','=','articles.uID')
+        $qGetArticles = $articles->where('aIsActive',1)
                                 ->orderBy('articles.aCreatedDate','DESC')
                                 ->skip($from)->take($to)
                                 ->get();
-        // dd($total);
         return view('user.index', compact('qGetTags', 'qGetCategories', 'qGetArticles', 'total', 'page', 'offset'));
     }
-
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function post(Request $request)
+    public function post(Request $request, $post)
     {
-        if(is_null($request->a) || !$request->a){
-            //throw it in to page 404
-        }else{
-            $qGetTags = Tags::all();
-            $qGetCategories = Categories::where('cID','!=',1)->get();
-
-        }
-        $qArticle = Articles::where('aIsActive',1)->where('aID',$request->a)
-                                ->leftJoin('categories', 'categories.cID', '=', 'articles.cID')
-                                ->leftJoin('users','users.uID','=','articles.uID')
-                                ->first();
-        // dd($total);
+        
+        $qGetTags = Tags::all();
+        $qGetCategories = Categories::where('cID','!=',1)->get();
+        $qArticle = $post ;
         return view('user.show-post', compact('qGetTags', 'qGetCategories', 'qArticle'));
 
     }

@@ -14,7 +14,7 @@
                 @foreach ($qGetCategories as $category)
                     @if($category['cParentID'] == 1 )
                         <li>
-                            <a href="/category/{{$category['cName']}}"> 
+                            <a href="/search/category/{{$category['cName']}}"> 
                                 {!!$category['cName']!!} 
                             </a>
                         </li>
@@ -22,7 +22,7 @@
                             @if($categorySub['cParentID'] == $category['cID'])
                                 <li>
                                     <i class="fa fa-caret-right"></i> 
-                                    <a href="/category/{{$categorySub['cName']}}"> 
+                                    <a href="/search/category/{{$categorySub['cName']}}"> 
                                         {!!$categorySub['cName']!!} 
                                     </a>
                                 </li>
@@ -76,7 +76,7 @@
             <h2 class="widget-title">Tags</h2>
             <div class="tag-cloud">
                 @foreach ($qGetTags as $tag) 
-                    <a href="/tag/{{$tag['tName']}}">{!!$tag['tName']!!}</a>
+                    <a href="/search/tag/{{$tag['tName']}}">{!!$tag['tName']!!}</a>
                 @endforeach
             </div>
         </div>
