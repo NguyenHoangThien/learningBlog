@@ -78,7 +78,7 @@ class home extends Controller
     public function contact()
     {
         //
-        return view('user.contact');
+        return view('user.contact-me');
     }
 
     /**

@@ -13,13 +13,14 @@
 
 Route::group(['prefix'=>'admin'], function (){
 	Route::group(['namespace'=>'admin', 'middleware'=>'auth'], function (){
+
 		Route::get('/login', 'login@index');
 		Route::post('/login/auth', 'login@auth');
 		Route::get('/logout', function(){
 			Session::flush();
 			return redirect('/admin/login');
 		});
-
+		Route::get('/{any}', 'category@index');
 		Route::get('/category', 'category@index');
 		Route::post('/categoryStore', 'category@store');
 		Route::post('/deleteCategory', 'category@destroy');
@@ -69,6 +70,9 @@ Route::group(['namespace'=>'user'], function (){
 	Route::get('/contact', 'home@contact');
 	Route::get('/search/tag/{searchTag}','home@searchTag');
 	Route::get('/search/category/{searchCategory}','home@searchCategory');
+	Route::get('/about-me',function(){
+		return view('user.about-me');
+	});
 });
 
 

@@ -9,5 +9,8 @@ use App\Http\Controllers\Controller;
 
 class dashboard extends Controller
 {
-    //
+   public function index()
+   {
+   	 return "dashboard admin";
+   }
 }

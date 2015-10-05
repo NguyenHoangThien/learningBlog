@@ -28,9 +28,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="contact-info-right">
-                        <p><i class="fa fa-map-marker"></i>House No: 00/aa<br/> Mirpur-1, Dhaka</p>
-                        <p><i class="fa fa-phone-square"></i> (00) 111 2222</p>
-                        <p><i class="fa fa-envelope"></i> info@dinlipi.com</p>                                    
+                        <p><i class="fa fa-map-marker"></i>Ho chi minh, Viet Nam</p>
+                        <p><i class="fa fa-phone-square"></i> (+84) 168 676 4263</p>
+                        <p><i class="fa fa-envelope"></i> hoang_thien1410@yahoo.com</p>                                    
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
       var mapOptions = {
         zoom: 16,
         scrollwheel: false,
-        center: new google.maps.LatLng(18.013764, -76.801992)
+        center: new google.maps.LatLng(10.768451, 106.6943626)
       };
 
       var map = new google.maps.Map(document.getElementById('map-canvas'),

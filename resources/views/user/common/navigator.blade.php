@@ -55,9 +55,13 @@
                 <div class="col-md-9">
                     <div class="navbar-collapse collapse"> 
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="/">Home</a></li>
-                            <li><a href="about-me.html">About</a></li>
-                            <li class="dropdown"><a data-toggle="dropdown" href="#">Other pages <span class="caret"></span></a>
+                            <li class="active">
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="/about-me">About</a>
+                            </li>
+                           {{--  <li class="dropdown"><a data-toggle="dropdown" href="#">Other pages <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="blog-left-sidebar.html">Home left sidebar</a></li>
                                     <li><a href="two-column-grid.html">Home 2 column masonry</a></li>
@@ -69,8 +73,8 @@
                             </li>
                             <li><a href="archive.html">Movie</a></li>
                             <li><a href="archive.html">Sports</a></li>
-                            <li><a href="archive.html">Travel</a></li>
-                            <li><a href="contact-me.html">Contact me</a></li>
+                            <li><a href="archive.html">Travel</a></li> --}}
+                            <li><a href="/contact-me">Contact me</a></li>
                         </ul>                                                     
                     </div>                        
                 </div>
