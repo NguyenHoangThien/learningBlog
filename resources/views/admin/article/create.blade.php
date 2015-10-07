@@ -21,7 +21,7 @@
 			<div class="col-xs-11">
 				<!-- form section start -->
 				<input type="hidden" name="_token" value="{{csrf_token()}}" />
-				<input type="hidden" name="articleID" value="{{$articleID}}" />
+				<input type="hidden" name="aID" value="{{$articleID}}" />
 				<div class="form-group">
 					<label class="col-sm-2 control-label no-padding-right" for="form-field-1">
 						Title :
@@ -76,7 +76,7 @@
 							@foreach ($qTags as $tag)
 								<option value="{{$tag['tName']}}" 
 								<?php 
-									if(in_array($tag['tName'],$qArticles['aTag']))
+									if(in_array($tag['tName'], explode(",", $qArticles['aTag'])))
 										echo 'selected';
 								?>
 								>{{$tag['tName']}}</option>
@@ -107,12 +107,20 @@
 				    <label class="control-label col-md-2">Icon:</label>
 					    <div class="col-md-9">
 					    	<input type="file" class="form-control" id="image" name="image">
-					    	<img src="" id="icon" style="margin-top:5px; max-height: 120px;"/>
+					    	<img 
+					    	<?php 
+					    		if(empty($qArticles['aImage'])){
+					    			$srcImage = "";
+					    		}else{
+					    			$srcImage = "/assets/images/".$qArticles['aImage'];
+					    		}
+					    	?>
+					    	src="{{$srcImage}}" 
+					    	id="icon" style="margin-top:5px; max-height: 120px;"/>
 					    </div>
 				    <div class="col-md-1"></div>
 				</div>
-
-				
+		
 				<!-- form section end -->	
 			</div>
 

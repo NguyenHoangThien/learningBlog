@@ -23,9 +23,8 @@ class article extends Controller
     public function index()
     {
         //
-        // $qArticles = Articles::all();   
-        // return view('admin.categories',compact('qArticles'));
-        return "view category/admin";
+        $qArticles = Articles::all();   
+        return view('admin.article.index',compact('qArticles'));
     }
 
     public function create(Request $request)
@@ -49,8 +48,7 @@ class article extends Controller
     public function store(Request $request)
     {
         if($request->aID){
-
-            $article = Articles::where(whereaID($request->aID));
+            $article = Articles::whereaid($request->aID)->first();
 
         }else{
 

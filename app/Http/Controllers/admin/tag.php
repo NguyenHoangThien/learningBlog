@@ -17,7 +17,7 @@ class tag extends Controller
      */
     public function index()
     {
-        $qTags = Tags::all();   
+        $qTags = Tags::all();  
         return view('admin.tags',compact('qTags'));
     }
 
