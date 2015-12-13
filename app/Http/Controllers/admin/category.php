@@ -22,7 +22,7 @@ class category extends Controller
     {
         $qGetCategories = DB::select('SELECT c.*,parent.cName as parentName from categories c LEFT JOIN ( SELECT * from categories ) as parent ON c.cParentID = parent.cID');
         // $qGetCategories = Categories::all();   
-        return view('admin.categories',compact('qGetCategories'));
+        return view('admin.categories', compact('qGetCategories'));
     }
 
     /**

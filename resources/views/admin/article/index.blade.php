@@ -1,6 +1,13 @@
 @extends('admin.layout')
+@section('hearderLink')
+	<link rel="stylesheet" href="/assets/css/adminUserPage.css" />
 
+	<link rel="stylesheet" href="/ACEAdmin/assets/css/chosen.css" /> <!-- for multi choose tag --> 
+	<!-- ace styles -->
+	<link rel="stylesheet" href="/ACEAdmin/assets/css/ace.min.css" />
+@stop
 @section('content')
+</div>
 	<div class="col-xs-12">
 		<h3 class="header smaller lighter blue">Articles management</h3>
 		<div class="table-header">
@@ -17,7 +24,7 @@
 						<tr>
 							<th style="width:5%;text-align:center;">ID</th>
 		                    <th style="text-align:center;">Title</th>
-		                    <th style="width:12%"></th>
+		                    <th style="width:15%"></th>
 		                </tr>
 		            </thead>
 	                <tbody>
@@ -33,6 +40,9 @@
 	                            	<a href="/admin/article/create?aID={{$article->aID}}">
 	                                	<i class="btn btn-mini btn-success ace-icon fa fa-pencil green" title="edit"onclick="viewArticle();"></i>
 	                                </a>
+	                                <a onclick="deleteArticle({{$article->aID}})">
+	                                	<i class="btn btn-mini btn-danger ace-icon fa fa-trash " title="edit"onclick="viewArticle();"></i>
+	                                </a>
 	                            </td>
 	                        </tr>   
 	                    @endforeach
@@ -44,10 +54,35 @@
 	</div>
 @stop
 
-<script type="text/javascript">
-	
-	function addNew(){
-		location.href = "/admin/article/create";
-	}
+@section('footer') 
 
-</script>
+	<script type="text/javascript">
+	
+		function addNew(){
+			location.href = "/admin/article/create";
+		}
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+		function deleteArticle(articleID) {
+			if(confirm("Are you sure you want to delete this article ?"))
+			{
+				$.ajax({
+					url: "/admin/article/destroy",
+					method: "POST",
+					data : {
+						aID : articleID
+					},
+					success : function(data){
+						location.reload();
+					},
+					error : function(e) {
+						alert( JSON.stringify(e));
+					}
+				});
+			}
+		}
+	</script>
+@stop

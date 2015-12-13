@@ -41,6 +41,12 @@ Route::group(['prefix'=>'admin'], function (){
 		Route::get('/article', 'article@index');
 		Route::get('/article/create', 'article@create');
 		Route::post('/article/store', 'article@store');
+		Route::post('/article/destroy', 'article@destroy');
+
+		Route::get('/navigator', 'navigator@index');
+		Route::get('/navigator/create', 'navigator@create');
+		Route::post('/navigator/store', 'navigator@store');
+		Route::post('/navigator/destroy', 'navigator@destroy');
 
 	});
 });

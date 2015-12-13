@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use Illuminate\Http\Request;
-
+use View;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Articles;

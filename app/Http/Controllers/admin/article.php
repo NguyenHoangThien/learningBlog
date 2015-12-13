@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Articles;
@@ -20,11 +19,11 @@ class article extends Controller
      *
      * @return Response
      */
+
     public function index()
     {
-        //
         $qArticles = Articles::all();   
-        return view('admin.article.index',compact('qArticles'));
+        return view('admin.article.index', compact('qArticles'));
     }
 
     public function create(Request $request)
@@ -92,9 +91,10 @@ class article extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Articles::destroy($request->aID);
+        return "success" ;
     }
 
     /**
