@@ -74,14 +74,17 @@ Route::group(['namespace'=>'user'], function (){
 	Route::get('/', 'home@index');
 	Route::get('/show-post/{post}', 'home@post');
 	Route::get('/contact', 'home@contact');
-	Route::get('/search/tag/{searchTag}','home@searchTag');
-	Route::get('/search/category/{searchCategory}','home@searchCategory');
-	Route::get('/about-me',function(){
+	Route::get('/search/tag/{searchTag}', 'home@searchTag');
+	Route::get('/search/category/{searchCategory}', 'home@searchCategory');
+	Route::get('/about-me', function(){
 		return view('user.about-me');
 	});
+	Route::any('/crawler', 	   'functionally@crawler');
+	Route::get('/sendMessage', 'functionally@message');
+	Route::get('/PDF-to-Word', 'functionally@formatPDFtoWord');
+	Route::get('/Word-to-PDF', 'functionally@formatWordtoPdf');
+
 });
-
-
 
 
 // Route::group(array('namespace' => 'User'), function (){

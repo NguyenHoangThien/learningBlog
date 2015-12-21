@@ -72,3 +72,4 @@
 <script src="/user/inc/venobox/venobox.min.js"></script>
 <script src="/user/js/main.js"></script>
 <script src="/user/js/color-change-function.js"></script>
+@yield('footer')

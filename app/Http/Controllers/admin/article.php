@@ -50,10 +50,8 @@ class article extends Controller
             $article = Articles::whereaid($request->aID)->first();
 
         }else{
-
             $article = new Articles;
             $article->aCreatedDate = date('Y-m-d H:i:s');
-
         }
 
         $file = Input::file('image');

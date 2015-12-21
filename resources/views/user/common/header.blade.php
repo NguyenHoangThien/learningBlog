@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DinLipi | HTML minimal blog template</title>
+    <title>Tinypro | Tinypro personal learning blog</title>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,200,700,600,500,800,900,100' rel='stylesheet' type='text/css'>
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="/user/css/bootstrap.min.css">

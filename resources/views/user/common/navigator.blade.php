@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="logo">
-                        <h1><a href="index.html">Din<span>Lipi</span></a></h1>
+                        <h1><a href="/">Tiny<span>pro</span></a></h1>
                         
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
