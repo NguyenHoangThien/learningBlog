@@ -23,7 +23,7 @@
                         <a target="_blank" href="http://behance.com/"><i class="fa fa-behance"></i></a>
                     </div>
                     
-                    <form action="http://demos.wpexpand.com/html/dinilipi/index.html" class="search-form" method="get" role="search">
+                    <form action="/search/" class="search-form" method="get" role="search">
                         <input type="search" title="Search for:" name="s" value="" placeholder="Search ..." class="search-field">
                         <input type="submit" value="Search" class="search-submit">
                     </form>   

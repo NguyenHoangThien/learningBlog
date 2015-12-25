@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
 use Input;
 use File;
 use Redirect;
+use Image;
+
+
 class user extends Controller
 {
     /**
@@ -30,6 +32,14 @@ class user extends Controller
      */
     public function create(Request $request)
     {
+        // $file = Input::file('/Koala.jpg');
+        // $image = Image::make($file->getRealPath())->resize('200','200')->save($filename);
+
+        // $image = Image::make('/Koala.jpg')->resize(300, 200);
+        // $image = Image::make('/Koala.jpg')->save('/user/ImageName.png');
+        $img = Image::make(public_path().'/Koala.jpg');
+        $img->resize(300,200)->save(public_path().'/Koala1.jpg');
+        dd($img);
         $qUsers = new Users ;
         $userID = $request->uID ? $request->uID : 0;
         if($userID){
@@ -48,8 +58,8 @@ class user extends Controller
      */
     public function store(Request $request)
     {
-        if($request->uID){
-            $user = Users::where("uID",$userID)->first();
+        if($request->userID){
+            $user = Users::where("uID", $request->userID)->first();
             if($request->password){
                 $user->uPassword       = md5($request->password);
             }
@@ -74,6 +84,8 @@ class user extends Controller
             $fileName = $fileName.rand(1,9999).".".$file->getClientOriginalExtension();
             Input::file('image')->move($destinationPath, $fileName);
             $user->uAvatar   = $fileName;
+
+
         }
         $user->save();
         return Redirect::action('admin\user@index');

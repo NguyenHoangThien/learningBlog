@@ -6,7 +6,7 @@
         <article class="post">
             <header class="entry-header">
                 <h2 class="entry-title">
-                    <a rel="bookmark" href="single-post.html">
+                    <a rel="bookmark" style="color: #f4645f;">
                         {{$qArticle['aTitle']}}
                     </a>
                 </h2> <!-- //.entry-title -->

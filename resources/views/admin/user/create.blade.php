@@ -7,9 +7,9 @@
 	<div class="page-header">
 		<h1>
 			@if($userID)
-				Add new user
-			@else
 				Edit user
+			@else
+				Add new user
 			@endif
 		</h1>
 	</div>
@@ -20,7 +20,7 @@
 				<span class="profile-picture">
 					@if($qUsers['uAvatar'] == "")
 						<img id="avatar" class="editable img-responsive avatar"
-							src="/ACEadmin/assets/avatars/profile-pic.jpg"/>
+							src="/ACEAdmin/assets/avatars/profile-pic.jpg"/>
 					@else
 						<img id="avatar" class="editable img-responsive avatar"
 							src="/assets/images/avatar/{{ $qUsers['uAvatar'] }}"/>
@@ -43,14 +43,16 @@
 					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Username (*):
 					</label>
 					<div class="col-sm-9">
-						<input type="text" name="username" id="form-field-1" placeholder="Username" value="{{ $qUsers['uUsername'] }}" class="col-xs-10 col-sm-5" required pattern=".{5,32}" required title="required 5 to 32 characters"/>
+						<input type="text" name="username" id="form-field-1" placeholder="Username" value="{{ $qUsers['uUsername'] }}" class="col-xs-10 col-sm-5" pattern=".{5,32}" required title="required 5 to 32 characters"/>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 		Email (*): 
 					</label>
 					<div class="col-sm-9">
-						<input type="text" name="email" id="form-field-1" placeholder="Email" class="col-xs-10 col-sm-5" value="{{ $qUsers['uEmail'] }}" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" title="email invalid !" required/>
+						<input type="text" name="email" id="form-field-1" placeholder="Email" class="col-xs-10 col-sm-5" value="{{ $qUsers['uEmail'] }}" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" title="email invalid !" required
+		
+						/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -66,7 +68,16 @@
 					</label>
 					<div class="col-sm-9">
 						<input type="password" name="password" id="form-field-1" placeholder="Password" 
-						title="Password must contain at least 6 characters" type="password" required pattern=".{6,32}" onchange="
+						title="Password must contain at least 6 characters" type="password" 
+						<?php
+							if(!$userID) {
+						?>
+								required
+						<?php
+							}
+						?>
+
+						pattern=".{6,32}" onchange="
 						this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
 						if(this.checkValidity()) form.rePassword.pattern = this.value;"
 						class="col-xs-10 col-sm-5" />
@@ -78,7 +89,18 @@
 					</label>
 					<div class="col-sm-9">
 						<input type="password" name="rePassword" id="form-field-1" placeholder="Retype Password"
-						title="Please enter the same Password as above" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="pwd2" onchange="
+						title="Please enter the same Password as above" type="password" 
+
+
+						<?php
+							if(!$userID) {
+						?>
+								required
+						<?php
+							}
+						?> 
+
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="pwd2" onchange="
   						this.setCustomValidity(this.validity.patternMismatch ? this.title : '');"
 						class="col-xs-10 col-sm-5" />
 					</div>
