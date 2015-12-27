@@ -37,9 +37,9 @@ class user extends Controller
 
         // $image = Image::make('/Koala.jpg')->resize(300, 200);
         // $image = Image::make('/Koala.jpg')->save('/user/ImageName.png');
-        $img = Image::make(public_path().'/Koala.jpg');
-        $img->resize(300,200)->save(public_path().'/Koala1.jpg');
-        dd($img);
+        // $img = Image::make(public_path().'/Koala.jpg');
+        // $img->resize(300,200)->save(public_path().'/Koala1.jpg');
+        // dd($img);
         $qUsers = new Users ;
         $userID = $request->uID ? $request->uID : 0;
         if($userID){
@@ -78,14 +78,15 @@ class user extends Controller
         $user->uPhone          = $request->phone;
 
         $file = Input::file('image');
+        // $file->getRealPath()
         if(!is_null($file)){
             $destinationPath = public_path().'/assets/images/avatar/';
             $fileName = explode(".", $file->getClientOriginalName())[0];
             $fileName = $fileName.rand(1,9999).".".$file->getClientOriginalExtension();
             Input::file('image')->move($destinationPath, $fileName);
+            Image::make($destinationPath . $fileName)->resize(400, 400)
+                                            ->save($destinationPath . '400x400/' . $fileName);
             $user->uAvatar   = $fileName;
-
-
         }
         $user->save();
         return Redirect::action('admin\user@index');
