@@ -12,19 +12,26 @@
 */
 use App\Models\Articles;
 
-Route::group(['prefix'=>'admin'], function (){
-	Route::group(['namespace'=>'admin', 'middleware'=>'auth'], function (){
+
+
+Route::group(['prefix' => 'admin'], function (){
+
+
+
+	// will rewrite model
+
+	Route::group(['namespace' => 'admin', 'middleware' => 'auth'], function () {
 		
-		Route::get('/login', 'login@index');
-		Route::post('/login/auth', 'login@auth');
-		Route::get('/logout', function(){
+		Route::get('/login', ['as' => 'admin.login', 'uses' => 'login@index']);
+		Route::post('/login/auth', ['as' => 'admin.authentication', 'uses' => 'login@auth']);
+		Route::get('/logout', ['as' => 'admin.logout', 'uses' => function() {
 			Session::flush();
 			return redirect('/admin/login');
-		});
+		}]);
 		
-		Route::get('/category', 'category@index');
-		Route::post('/categoryStore', 'category@store');
-		Route::post('/deleteCategory', 'category@destroy');
+		Route::get('/category', ['as' => 'admin.category.index', 'uses' => 'category@index']);
+		Route::post('/categoryStore', ['as' => 'admin.category.store', 'uses' => 'category@store']);
+		Route::post('/deleteCategory', ['as' => 'admin.category.destroy', 'uses' => 'category@destroy']);
 
 		Route::get('/role', 'role@index');
 		Route::post('/roleStore', 'role@store');
@@ -39,7 +46,7 @@ Route::group(['prefix'=>'admin'], function (){
 		Route::post('/user/store', 'user@store');
 		Route::post('/userBand', 'user@band');
 
-		Route::get('/article', 'article@index');
+		Route::get('/article', ['as' => 'admin.article.list', 'uses' => 'article@index']);
 		Route::get('/article/create', 'article@create');
 		Route::post('/article/store', 'article@store');
 		Route::post('/article/destroy', 'article@destroy');
@@ -55,19 +62,19 @@ Route::group(['prefix'=>'admin'], function (){
 Route::bind('searchTag', function($tag){
 	return 	Articles::where('aTag','like','%'.$tag.'%')
 								->leftJoin('categories', 'categories.cID', '=', 'articles.cID')
-                                ->leftJoin('users','users.uID','=','articles.uID');
+                                ->leftJoin('users', 'users.uID', '=', 'articles.uID');
 });
 
 Route::bind('searchCategory', function($category){
 	return 	Articles::where('cName',$category)
 								->leftJoin('categories', 'categories.cID', '=', 'articles.cID')
-                                ->leftJoin('users','users.uID','=','articles.uID');
+                                ->leftJoin('users', 'users.uID', '=', 'articles.uID');
 });
 
 Route::bind('post',function($id){
 	return 	Articles::where('aIsActive',1)->where('aID',$id)
                                 ->leftJoin('categories', 'categories.cID', '=', 'articles.cID')
-                                ->leftJoin('users','users.uID','=','articles.uID')
+                                ->leftJoin('users', 'users.uID', '=', 'articles.uID')
                                 ->first();
 });
 

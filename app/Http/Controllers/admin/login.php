@@ -30,76 +30,53 @@ class login extends Controller
      */
     public function auth(Request $request)
     {
-        // dd($request);
-        $result = Users::where('uUsername', $request->username)->where('uPassword', md5($request->password))->first();
-        if($result){
-            Session::put('userID', $result['uID']);
-            Session::put('username', $result['uUsername']);
-            Session::put('role', $result['uRole']);
-            /*
-            * if( !is_null($request->remember) )
-            * store cookie here 
-            */
-            return redirect('/admin/category');
-        }else{
+       
+        $params = [
+            'username' => $request->username,
+            'password' => $request->password,
+        ];
+
+        $result = Users::authentication($params);
+        if($result) {
+            $sessionParams = [
+                'userID'    => $result->uID,
+                'username'  => $result->uUsername,
+                'role'      => $result->uRole
+            ];
+
+
+            $this->setSessionForUser($sessionParams);
+            redirect('admin/category');
+            // $this->redirectAdminPage();
+            return redirect('admin/category');
+            
+        } else {
+
             $error = 1;
-            return Redirect::action('admin\login@index',compact('error'));
+            return Redirect::action('admin\login@index', compact('error'));
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
+    public function redirectAdminPage() 
     {
-        //
+        $rememberPath = Session::get('rememberPath');
+
+        if(empty($rememberPath)) {
+
+            return redirect('admin/category');
+        } else {
+            // clear rememberPath
+            Session::put('rememberPath', '');
+
+            return redirect($rememberPath);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
+    public function setSessionForUser($params) 
     {
-        //
+        foreach ($params as $key => $value) {
+            Session::put($key, $value);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

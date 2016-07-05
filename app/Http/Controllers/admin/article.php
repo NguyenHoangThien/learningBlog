@@ -31,12 +31,15 @@ class article extends Controller
         $qCategories = Categories::all();
         $qTags = Tags::all();
         $articleID = $request->aID ? $request->aID : 0;
-        if($articleID){
+        if($articleID) {
+
             $qArticles = Articles::where("aID",$articleID)->first();
-        }else{
+
+        } else {
+
             $qArticles = new Articles;
         }
-        return view('admin.article.create',compact('qArticles','articleID','qCategories','qTags'));
+        return view('admin.article.create', compact('qArticles','articleID','qCategories','qTags'));
     }
     /**
      * Store a newly created resource in storage.
@@ -58,7 +61,7 @@ class article extends Controller
         if(!is_null($file)){
             $destinationPath = public_path().'/assets/images/';
             $fileName = explode(".", $file->getClientOriginalName())[0];
-            $fileName = $fileName.rand(1,9999).".".$file->getClientOriginalExtension();
+            $fileName = $fileName.rand(1, 9999) . "." . $file->getClientOriginalExtension();
             Input::file('image')->move($destinationPath, $fileName);
             $article->aImage = $fileName;
             if($request->cID){

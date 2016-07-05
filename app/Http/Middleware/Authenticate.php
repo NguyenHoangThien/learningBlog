@@ -39,9 +39,18 @@ class Authenticate
     {
         $path      = Request::path();
         $flag      =  $path == "admin/login" || $path == "admin/login/auth";
-        if(!Session::get('userID') && !$flag){
+
+        // if had login redirect to admin dashboard
+        if(Session::get('userID') && $path == "admin/login") {
+            return redirect('admin/category');
+        }
+
+
+        if(!Session::get('userID') && !$flag) {
+            Session::put('rememberPath', $path);
             return redirect('/admin/login');
         }
+
         return $next($request);
     }
 }

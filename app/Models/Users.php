@@ -9,5 +9,13 @@ class Users extends Model
 	protected $primaryKey = 'uID';
 	public $timestamps = false;
 
+
+
+	public static function authentication($params) {
+
+		$md5Pass = md5($params['password']);
+
+		return self::where('uUsername', $params['username'])->where('uPassword', $md5Pass)->first();
+	}
 	
 }

@@ -1,6 +1,6 @@
 @extends('user.layout')
 @section('content')
-    <div class="col-sm-8">
+    <div class="col-sm-8"> 
         @foreach ($qGetArticles as $article) 
             <article class="post">
                 <div class="post-content">
@@ -74,6 +74,6 @@
     </div>
 
     {{-- right column start --}}
-    <?= view('user.common.rightSideBar',compact('qGetCategories','qGetTags')); ?>
+    <?= view('user.common.rightSideBar', compact('qGetCategories','qGetTags')); ?>
     {{-- right column end --}}
 @stop

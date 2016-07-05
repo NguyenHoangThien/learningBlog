@@ -30,7 +30,7 @@
 						<b class="arrow"></b>
 					</li>
 					<li class="">
-						<a href="/admin/article/create">
+						<a href="/admin/article">
 							<i class="menu-icon fa fa-caret-right"></i>
 							Articles
 						</a>
@@ -59,7 +59,7 @@
 					</li>
 				</ul>
 			</li>
-			<li class="">
+			<!-- <li class="">
 				<a href="typography.html">
 					<i class="menu-icon fa fa-caret-right"></i>
 					Typography
@@ -74,7 +74,7 @@
 				</a>
 
 				<b class="arrow"></b>
-			</li>
+			</li> -->
 		</ul>
 	</li>
 	
